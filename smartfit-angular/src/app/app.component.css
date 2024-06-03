@@ -1,0 +1,32 @@
+#mainFooter{
+position: absolute;
+bottom: 0;
+width: 100%;
+}
+
+#mainFooter h2{
+color: white;
+font-family: Courier;
+}
+
+.lastSection{
+background-color: black;
+width: 100%;
+text-align: center;
+}
+
+.logoSFGrey{
+width: 150px;
+height: 150px;
+}
+
+.whiteLine{
+background-color: white;
+width: 90%;
+height: 1%;
+}
+
+.linkFooter{
+  color: white;
+  text-decoration: none;
+}
