@@ -109,19 +109,21 @@ INSERT INTO user (role_usr, user_usr, password_usr, id_client_usr) VALUES
 ('CUSTOMER', 'customer9@example.com', 'Ipassword9@', 9),
 ('CUSTOMER', 'customer10@example.com', 'Jpassword10@', 10);
 
-INSERT INTO payment (month_pyt, due_date_pyt, star_date_pyt, end_date_pyt, total_balance_pyt, flag_pmd, id_client_pyt)
+INSERT INTO payment (payment_description_pyt, due_date_pyt, star_date_pyt, end_date_pyt, total_balance_pyt, flag_pmd, id_client_pyt)
 VALUES 
-('MAYO', '10-JUN-2024', '04/05/2024', '03/06/2024', 200.00, 'MASTERCARD', 1),
-('JUNIO', '10-JUL-2024', '04/06/2024', '03/07/2024', 200.00, 'VISA', 1),
-('JUNIO', '10-JUL-2024', '04/06/2024', '03/07/2024', 200.00, 'VISA', 2),
-('JUNIO', '10-JUL-2024', '04/06/2024', '03/07/2024', 400.00, 'VISA', 3),
-('JUNIO', '10-JUL-2024', '04/06/2024', '03/07/2024', 400.00, 'MASTERCARD', 4),
-('JUNIO', '10-JUL-2024', '04/06/2024', '03/07/2024', 400.00, 'MASTERCARD', 5),
-('JUNIO', '10-JUL-2024', '04/06/2024', '03/07/2024', 600.00, 'VISA', 6),
-('JUNIO', '10-JUL-2024', '04/06/2024', '03/07/2024', 600.00, 'MASTERCARD', 7),
-('JUNIO', '10-JUL-2024', '04/06/2024', '03/07/2024', 600.00, 'VISA', 8),
-('JUNIO', '10-JUL-2024', '04/06/2024', '03/07/2024', 600.00, 'AMEX', 9),
-('JUNIO', '10-JUL-2024', '04/06/2024', '03/07/2024', 600.00, 'AMEX', 10);
+('MENSUALIDAD DE MAYO', '10-JUN-2024', '04/05/2024', '03/06/2024', 200.00, 'MASTERCARD', 1),
+('PAGO DE MANTENIMIENTO', '11-MAY-2024', NULL, NULL, 14.99, NULL, 1),
+('PAGO DE INSCRIPCIÓN', '10-MAY-2024', NULL, NULL, 0.00, NULL, 1),
+('MENSUALIDAD DE JUNIO', '10-JUL-2024', '04/06/2024', '03/07/2024', 200.00, 'VISA', 1),
+('MENSUALIDAD DE JUNIO', '10-JUL-2024', '04/06/2024', '03/07/2024', 200.00, 'VISA', 2),
+('MENSUALIDAD DE JUNIO', '10-JUL-2024', '04/06/2024', '03/07/2024', 400.00, 'VISA', 3),
+('MENSUALIDAD DE JUNIO', '10-JUL-2024', '04/06/2024', '03/07/2024', 400.00, 'MASTERCARD', 4),
+('MENSUALIDAD DE JUNIO', '10-JUL-2024', '04/06/2024', '03/07/2024', 400.00, 'MASTERCARD', 5),
+('MENSUALIDAD DE JUNIO', '10-JUL-2024', '04/06/2024', '03/07/2024', 600.00, 'VISA', 6),
+('MENSUALIDAD DE JUNIO', '10-JUL-2024', '04/06/2024', '03/07/2024', 600.00, 'MASTERCARD', 7),
+('MENSUALIDAD DE JUNIO', '10-JUL-2024', '04/06/2024', '03/07/2024', 600.00, 'VISA', 8),
+('MENSUALIDAD DE JUNIO', '10-JUL-2024', '04/06/2024', '03/07/2024', 600.00, 'AMEX', 9),
+('MENSUALIDAD DE JUNIO', '10-JUL-2024', '04/06/2024', '03/07/2024', 600.00, 'AMEX', 10);
 
 INSERT INTO client_plan_training_unit (id_client_cpl, id_plan_cpl, start_date_cpl, id_training_unit_cpl) VALUES
 (1, 1, 'Mayo de 2024', 1),

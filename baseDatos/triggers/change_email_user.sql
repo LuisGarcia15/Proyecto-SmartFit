@@ -1,0 +1,10 @@
+DELIMITER //
+CREATE TRIGGER CHANGE_EMAIL_USER
+AFTER UPDATE ON client
+FOR EACH ROW
+BEGIN
+	UPDATE user
+	SET user_usr = NEW.email_clt
+	WHERE id_usr = NEW.id_clt;
+END //
+DELIMITER ; 

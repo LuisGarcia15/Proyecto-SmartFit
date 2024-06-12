@@ -1,0 +1,1 @@
+UPDATE client SET email_clt = 'customerprueba@example.com' WHERE id_clt = 1;
