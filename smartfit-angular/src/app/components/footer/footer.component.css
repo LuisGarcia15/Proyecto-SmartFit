@@ -1,0 +1,51 @@
+footer h2{
+color: white;
+}
+
+#mainFooter{
+background-color: black;
+}
+
+.lastSection{
+width: 100%;
+text-align: center;
+}
+
+.logoSFGrey{
+width: 200px;
+height: 200px;
+}
+
+.whiteLine{
+  border-top:solid 1px white;
+  width:90%;
+  margin: 30px auto;
+}
+
+.iconFooter{
+color: white;
+font-size: 2rem;
+padding: 0px 10px 0px 10px;
+}
+
+.divList{
+  text-align: left;
+}
+
+.linkFooter{
+  color: white;
+  text-decoration: none;
+}
+
+.condiciones{
+color: white;
+text-align: left;
+padding: 0 6% 0 5%;
+}
+
+.whiteLineLast{
+  border-top:solid 1px white;
+  width:90%;
+  height:150px;
+  margin: auto;
+}
