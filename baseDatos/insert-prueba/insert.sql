@@ -78,7 +78,7 @@ INSERT INTO training_unit (name_place_tu, id_training_unit_address) VALUES
 ('GYM NUEVE', 9),
 ('GYM DIEZ', 10);
 
-INSERT INTO plan (name_pln, monthly_payment_pln) VALUES 
+INSERT INTO plan (name_pln, price_pln) VALUES 
 ('PLAN BASICO', 200.00),
 ('PLAN PREMIUM', 400.00),
 ('PLAN ELITE', 600.00);

@@ -14,11 +14,12 @@ email_clt VARCHAR(50) NOT NULL,
 PRIMARY KEY (id_clt),
 CONSTRAINT MINIMUM_4_CHARACTERS_NAME CHECK(CHAR_LENGTH(name_clt)>=4 AND CHAR_LENGTH(paternal_surname_clt)>=4 AND CHAR_LENGTH(maternal_surname_clt)>=4),
 CONSTRAINT ONLY_LETTERS CHECK(name_clt REGEXP '[^0-9]' AND paternal_surname_clt REGEXP '[^0-9]' AND maternal_surname_clt REGEXP '[^0-9]'),
-CONSTRAINT NO_SIMBOLS CHECK(name_clt REGEXP '^[A-ZÑ ]+$' AND paternal_surname_clt REGEXP '^[A-ZÑ ]+$' AND maternal_surname_clt REGEXP '^[A-ZÑ ]+$'),
+CONSTRAINT NO_SIMBOLS CHECK(name_clt REGEXP '[A-ZÑÁÉÍÓÚÜ ]+$' AND paternal_surname_clt REGEXP '[A-ZÑÁÉÍÓÚÜ ]+$' AND maternal_surname_clt REGEXP '[A-ZÑÁÉÍÓÚÜ ]+$'),
 CONSTRAINT EXCLUSIVE_CURP UNIQUE(curp_clt),
-CONSTRAINT CURP_FORMAT CHECK(curp_clt REGEXP '^[A-Z0-9]{18}'),
+CONSTRAINT CURP_FORMAT CHECK(curp_clt REGEXP '^[A-ZÑ0-9]{18}'),
 CONSTRAINT ONLY_PHONE_NUMBER CHECK(phone_number_clt REGEXP'^[0-9]{10}$'),
-CONSTRAINT EMAIL CHECK(email_clt REGEXP '^[a-z0-9!#$%&*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$')
+CONSTRAINT EMAIL CHECK(email_clt REGEXP '^[a-z0-9!#$%&*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$'),
+CONSTRAINT EXCLUSIVE_MAIL UNIQUE(email_clt)
 )DEFAULT CHARACTER SET utf8;
 /*------------------------------------------------- 5*/
 CREATE TABLE contact_person(
@@ -32,8 +33,7 @@ PRIMARY KEY (id_cpn),
 FOREIGN KEY (id_client_cpn) REFERENCES client(id_clt) ON DELETE CASCADE,
 CONSTRAINT MINIMUM_4_CHARACTERS_NAME CHECK(CHAR_LENGTH(name_cpn)>=4 AND CHAR_LENGTH(paternal_surname_cpn)>=4 AND CHAR_LENGTH(maternal_surname_cpn)>=4),
 CONSTRAINT ONLY_LETTERS CHECK(name_cpn REGEXP '[^0-9]' AND paternal_surname_cpn REGEXP '[^0-9]' AND maternal_surname_cpn REGEXP '[^0-9]'),
-CONSTRAINT NO_SIMBOLS CHECK(name_cpn REGEXP '^[A-ZÑ ]+$' AND paternal_surname_cpn REGEXP '^[A-ZÑ ]+$' AND maternal_surname_cpn REGEXP '^[A-ZÑ ]+$'),
-CONSTRAINT ONLY_UPPERCASE_LETTERS CHECK(name_cpn REGEXP '^[A-ZÑ]+$' AND paternal_surname_cpn REGEXP '^[A-ZÑ]+$' AND maternal_surname_cpn REGEXP '^[A-ZÑ]+$'),
+CONSTRAINT NO_SIMBOLS CHECK(name_cpn REGEXP '[A-ZÑÁÉÍÓÚÜ ]+$' AND paternal_surname_cpn REGEXP '[A-ZÑÁÉÍÓÚÜ ]+$' AND maternal_surname_cpn REGEXP '[A-ZÑÁÉÍÓÚÜ ]+$'),
 CONSTRAINT ONLY_PHONE_NUMBER CHECK(phone_number_cpn REGEXP'^[0-9]{10}$')
 )DEFAULT CHARACTER SET utf8;
 /*------------------------------------------------- 5*/
@@ -49,8 +49,8 @@ PRIMARY KEY (id_cls),
 FOREIGN KEY (id_client_cls) REFERENCES client(id_clt) ON DELETE CASCADE,
 CONSTRAINT MINIMUM_4_CHARACTERS_NAME CHECK(CHAR_LENGTH(name_cls)>=4 AND CHAR_LENGTH(state_cls)>=4 AND CHAR_LENGTH(city_cls)>=4),
 CONSTRAINT ONLY_LETTERS CHECK(name_cls REGEXP '[^0-9]' AND state_cls REGEXP '[^0-9]' AND city_cls REGEXP '[^0-9]'),
-CONSTRAINT NO_SIMBOLS CHECK(name_cls REGEXP '^[A-ZÑ ]+$' AND state_cls REGEXP '^[A-ZÑ ]+$' AND city_cls REGEXP '^[A-ZÑ ]+$'),
-CONSTRAINT NUMBER_SIZE CHECK(outer_number_cls REGEXP '^[0-9]+' AND inside_number_cls REGEXP '^[0-9]+')
+CONSTRAINT NO_SIMBOLS CHECK(name_cls REGEXP '[A-ZÑÁÉÍÓÚÜ ]+$' AND state_cls REGEXP '[A-ZÑÁÉÍÓÚÜ ]+$' AND city_cls REGEXP '[A-ZÑÁÉÍÓÚÜ ]+$'),
+CONSTRAINT NUMBER_FORMTAT CHECK(outer_number_cls REGEXP '^[0-9]+' AND inside_number_cls REGEXP '^[0-9]+')
 )DEFAULT CHARACTER SET utf8;
 /*------------------------------------------------- 5*/
 CREATE TABLE payment_method(
@@ -65,7 +65,7 @@ PRIMARY KEY (id_pmd),
 FOREIGN KEY (id_client_pmd) REFERENCES client(id_clt) ON DELETE CASCADE,
 CONSTRAINT MINIMUM_4_CHARACTERS_NAME CHECK(CHAR_LENGTH(full_name_pmd)>=4),
 CONSTRAINT ONLY_LETTERS CHECK(full_name_pmd REGEXP '[^0-9]'),
-CONSTRAINT NO_SIMBOLS CHECK(full_name_pmd REGEXP '^[A-ZÑ ]+$'),
+CONSTRAINT NO_SIMBOLS CHECK(full_name_pmd REGEXP '[A-ZÑÁÉÍÓÚÜ ]+$'),
 CONSTRAINT CARD_NUMBER_SIZE CHECK(number_card_pmd REGEXP '^[0-9]{16}'),
 CONSTRAINT CV_SIZE CHECK(number_cvc_pmd REGEXP '^[0-9]{3}'),
 CONSTRAINT FORMAT_DATE CHECK(date_card_pmd REGEXP '^[0-9]{2}-[0-9]{2}')
@@ -85,21 +85,21 @@ FOREIGN KEY (id_client_pyt) REFERENCES client(id_clt) ON DELETE CASCADE,
 CONSTRAINT MINIMUM_4_CHARACTERS_NAME CHECK(CHAR_LENGTH(payment_description_pyt)>=4),
 CONSTRAINT ONLY_LETTERS CHECK(payment_description_pyt REGEXP '[^0-9]'),
 CONSTRAINT NO_SIMBOLS CHECK(payment_description_pyt REGEXP '^[A-ZÑÁÉÍÓÚÜ ]+$'),
-CONSTRAINT DUE_DATE_FORMAT CHECK(due_date_pyt REGEXP '^[0-9]{2}[-]{1}[A-ZÑ]{3}[-]{1}[0-9]{4}$'),
-CONSTRAINT DATE_MONTH_FORMAT CHECK(star_date_pyt REGEXP '^^[0-9]{2}[/]{1}[0-9]{2}[/]{1}[0-9]{4}$' AND end_date_pyt REGEXP '^^[0-9]{2}[/]{1}[0-9]{2}[/]{1}[0-9]{4}$')
+CONSTRAINT DUE_DATE_FORMAT CHECK(due_date_pyt REGEXP '^[0-9]{2}[-]{1}[A-Z]{3}[-]{1}[0-9]{4}$'),
+CONSTRAINT DATE_MONTH_FORMAT CHECK(star_date_pyt REGEXP '^[0-9]{2}[/]{1}[0-9]{2}[/]{1}[0-9]{4}$' AND end_date_pyt REGEXP '^[0-9]{2}[/]{1}[0-9]{2}[/]{1}[0-9]{4}$')
 )DEFAULT CHARACTER SET utf8;
 /*------------------------------------------------- 5*/
 CREATE TABLE training_unit_address(
 id_tru	INTEGER NOT NULL AUTO_INCREMENT,
 name_tru VARCHAR(70) NOT NULL,
-outer_number_tru INTEGER(15) NOT NULL,
-inside_number_tru INTEGER(15),
+outer_number_tru INTEGER(5) NOT NULL,
+inside_number_tru INTEGER(5) NULL,
 state_tru VARCHAR(40) NOT NULL,
 city_tru VARCHAR(40) NOT NULL,
 PRIMARY KEY (id_tru),
 CONSTRAINT MINIMUM_4_CHARACTERS_NAME CHECK(CHAR_LENGTH(name_tru)>=4 AND CHAR_LENGTH(state_tru)>=4 AND CHAR_LENGTH(city_tru)>=4),
 CONSTRAINT ONLY_LETTERS CHECK(name_tru REGEXP '[^0-9]' AND state_tru REGEXP '[^0-9]' AND city_tru REGEXP '[^0-9]'),
-CONSTRAINT NO_SIMBOLS CHECK(name_tru REGEXP '^[A-ZÑ ]+$' AND state_tru REGEXP '^[A-ZÑ ]+$' AND city_tru REGEXP '^[A-ZÑ ]+$'),
+CONSTRAINT NO_SIMBOLS CHECK(name_tru REGEXP '[A-ZÑÁÉÍÓÚÜ ]+$' AND state_tru REGEXP '[A-ZÑÁÉÍÓÚÜ ]+$' AND city_tru REGEXP '[A-ZÑÁÉÍÓÚÜ ]+$'),
 CONSTRAINT NUMBER_SIZE CHECK(outer_number_tru REGEXP '^[0-9]+' AND inside_number_tru REGEXP '^[0-9]+')
 )DEFAULT CHARACTER SET utf8;
 /*------------------------------------------------- 5*/
@@ -109,7 +109,7 @@ name_bns VARCHAR(150) NOT NULL,
 PRIMARY KEY (id_bns),
 CONSTRAINT MINIMUM_4_CHARACTERS_NAME CHECK(CHAR_LENGTH(name_bns)>=4),
 CONSTRAINT ONLY_LETTERS CHECK(name_bns REGEXP '[^0-9]'),
-CONSTRAINT NO_SIMBOLS CHECK(name_bns REGEXP '^[A-ZÑ ]+$')
+CONSTRAINT NO_SIMBOLS CHECK(name_bns REGEXP '[A-ZÑÁÉÍÓÚÜ ]+$')
 )DEFAULT CHARACTER SET utf8;
 /*------------------------------------------------- 5*/
 CREATE TABLE training_unit(
@@ -120,17 +120,17 @@ PRIMARY KEY (id_tru),
 FOREIGN KEY (id_training_unit_address) REFERENCES training_unit_address(id_tru),
 CONSTRAINT MINIMUM_4_CHARACTERS_NAME CHECK(CHAR_LENGTH(name_place_tu)>=4),
 CONSTRAINT ONLY_LETTERS CHECK(name_place_tu REGEXP '[^0-9]'),
-CONSTRAINT NO_SIMBOLS CHECK(name_place_tu REGEXP '^[A-ZÑ ]+$')
+CONSTRAINT NO_SIMBOLS CHECK(name_place_tu REGEXP '[A-ZÑÁÉÍÓÚÜ ]+$')
 )DEFAULT CHARACTER SET utf8;
 /*------------------------------------------------- 5*/
 CREATE TABLE plan(
 id_pln INTEGER NOT NULL AUTO_INCREMENT,
 name_pln VARCHAR(15) NOT NULL,
-monthly_payment_pln DOUBLE NOT NULL,
+price_pln DOUBLE NOT NULL,
 PRIMARY KEY (id_pln),
 CONSTRAINT MINIMUM_4_CHARACTERS_NAME CHECK(CHAR_LENGTH(name_pln)>=4),
 CONSTRAINT ONLY_LETTERS CHECK(name_pln REGEXP '[^0-9]'),
-CONSTRAINT NO_SIMBOLS CHECK(name_pln REGEXP '^[A-ZÑ ]+$')
+CONSTRAINT NO_SIMBOLS CHECK(name_pln REGEXP '[A-ZÑÁÉÍÓÚÜ ]+$')
 )DEFAULT CHARACTER SET utf8;
 /*------------------------------------------------- 5*/
 CREATE TABLE plan_benefits(
@@ -149,9 +149,9 @@ password_usr		VARCHAR(16) NOT NULL,
 id_client_usr		INTEGER NOT NULL,
 PRIMARY KEY (id_usr),
 FOREIGN KEY (id_client_usr) REFERENCES client(id_clt) ON DELETE CASCADE,
-CONSTRAINT MINIMUM_7_CHARACTERS CHECK(CHAR_LENGTH(role_usr)>=7),
+CONSTRAINT MINIMUM_7_CHARACTERS CHECK(CHAR_LENGTH(role_usr)>=5),
 CONSTRAINT ONLY_LETTERS CHECK(role_usr REGEXP '[^0-9]'),
-CONSTRAINT NO_SIMBOLS CHECK(role_usr REGEXP '^[A-ZÑ ]+$'),
+CONSTRAINT NO_SIMBOLS CHECK(role_usr REGEXP '^[A-Z ]+$'),
 CONSTRAINT EMAIL CHECK(user_usr REGEXP '^[a-z0-9!#$%&*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$'),
 CONSTRAINT EXCLUSIVE_USER UNIQUE(user_usr),
 CONSTRAINT PASS_STRUCTURE CHECK(password_usr REGEXP '^[A-Z]{1}[a-z0-9]+[a-z0-9ñ@!¡#$%&¿?+*-]+'),

@@ -43,6 +43,19 @@ INNER JOIN training_unit_address as tua on tu.id_training_unit_address = tua.id_
 INNER JOIN plan_benefits as pb on pl.id_pln = pb.id_plan_plb
 INNER JOIN benefits as b on pb.id_benefits_plb = b.id_bns;
 
+/*TEST*/
+SELECT * FROM user as u
+INNER JOIN client as c on u.id_client_usr = c.id_clt
+INNER JOIN contact_person as cp on c.id_clt = cp.id_client_cpn
+INNER JOIN client_address as ca on c.id_clt = ca.id_client_cls
+INNER JOIN payment as p on c.id_clt = p.id_client_pyt
+WHERE c.id_clt = 2;
+
+SELECT * FROM user as u
+INNER JOIN client as c on u.id_client_usr = c.id_clt
+INNER JOIN payment_method as pm on c.id_clt = pm.id_client_pmd
+WHERE flag_pmd = 'AMEX';
+
 /*user-client*/
 SELECT * FROM user as u
 INNER JOIN client as c on u.id_client_usr = id_clt;
