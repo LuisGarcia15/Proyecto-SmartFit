@@ -22,25 +22,44 @@ height: 200px;
   margin: 30px auto;
 }
 
+.linkFooter{
+  color: white;
+  text-decoration: none;
+}
+
 .iconFooter{
 color: white;
 font-size: 2rem;
 padding: 0px 10px 0px 10px;
 }
 
+#aboutGym{
+display: flex;
+justify-content: space-evenly;
+}
+
 .divList{
   text-align: left;
 }
 
-.linkFooter{
-  color: white;
-  text-decoration: none;
+.aboutList{
+list-style-type: none;
+margin: 0;
+padding: 0;
 }
 
-.condiciones{
+.conditions{
 color: white;
 text-align: left;
 padding: 0 6% 0 5%;
+}
+
+#conditionsList{
+padding: 0 0 0 1%;
+}
+
+#boldYear{
+font-weight: bold;
 }
 
 .whiteLineLast{
