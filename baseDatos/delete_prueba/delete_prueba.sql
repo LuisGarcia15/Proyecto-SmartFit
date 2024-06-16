@@ -1,0 +1,1 @@
+DELETE FROM client WHERE id_clt = 1;
