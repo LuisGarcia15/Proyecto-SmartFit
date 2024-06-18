@@ -1,0 +1,13 @@
+#backgroundSection{
+  background-color: #eeeeee;
+  padding: 15%;
+  width: 100%;
+}
+
+#boxLogin{
+  background-color: white;
+  width: 400px;
+  height: 200px;
+  text-align: center;
+  margin: 10px auto 10px auto;
+}
