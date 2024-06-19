@@ -31,6 +31,7 @@ public class User {
     private String password;
     @OneToOne(orphanRemoval = true)
     @JoinColumn(name = "id_client_usr")
+    @NotNull
     private Long idClient;
 
     public User() {
@@ -76,11 +77,11 @@ public class User {
         this.password = password;
     }
 
-    public Long getIdClient() {
+    public @NotNull Long getIdClient() {
         return idClient;
     }
 
-    public void setIdClient(Long idClient) {
+    public void setIdClient(@NotNull Long idClient) {
         this.idClient = idClient;
     }
 

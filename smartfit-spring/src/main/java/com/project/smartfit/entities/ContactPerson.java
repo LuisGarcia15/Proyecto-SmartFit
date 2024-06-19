@@ -6,43 +6,40 @@ import jakarta.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
-@Table(name = "client")
-public class Client {
+@Table(name = "contact_person")
+public class ContactPerson {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_clt")
+    @Column(name = "name_cpn")
     private Long id;
-    @Column(name = "name_clt")
+    @Column(name = "paternal_surname_cpn")
     @NotNull
     private String name;
-    @Column(name = "paternal_surname_clt")
+    @Column(name = "paternal_surname_cpn")
     @NotNull
     private String paternalSurname;
-    @Column(name = "maternal_surname_clt")
+    @Column(name = "maternal_surname_cpn")
     @NotNull
     private String maternalSurname;
-    @Column(name = "curp_clt")
-    @NotNull
-    private String curp;
-    @Column(name = "phone_number_clt")
+    @Column(name = "phone_number_cpn")
     @NotNull
     private String phoneNumber;
-    @Column(name = "email_clt")
+    @OneToOne(orphanRemoval = true)
+    @JoinColumn(name = "id_client_cls")
     @NotNull
-    private String email;
+    private Long idClient;
 
-    public Client() {
+    public ContactPerson() {
     }
 
-    public Client(Long id, String name, String paternalSurname, String maternalSurname, String curp, String phoneNumber, String email) {
+    public ContactPerson(Long id, String name, String paternalSurname, String maternalSurname, String phoneNumber, Long idClient) {
         this.id = id;
         this.name = name;
         this.paternalSurname = paternalSurname;
         this.maternalSurname = maternalSurname;
-        this.curp = curp;
         this.phoneNumber = phoneNumber;
-        this.email = email;
+        this.idClient = idClient;
     }
 
     public Long getId() {
@@ -77,14 +74,6 @@ public class Client {
         this.maternalSurname = maternalSurname;
     }
 
-    public @NotNull String getCurp() {
-        return curp;
-    }
-
-    public void setCurp(@NotNull String curp) {
-        this.curp = curp;
-    }
-
     public @NotNull String getPhoneNumber() {
         return phoneNumber;
     }
@@ -93,36 +82,35 @@ public class Client {
         this.phoneNumber = phoneNumber;
     }
 
-    public @NotNull String getEmail() {
-        return email;
+    public @NotNull Long getIdClient() {
+        return idClient;
     }
 
-    public void setEmail(@NotNull String email) {
-        this.email = email;
+    public void setIdClient(@NotNull Long idClient) {
+        this.idClient = idClient;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Client client)) return false;
-        return Objects.equals(id, client.id) && Objects.equals(name, client.name) && Objects.equals(paternalSurname, client.paternalSurname) && Objects.equals(maternalSurname, client.maternalSurname) && Objects.equals(curp, client.curp) && Objects.equals(phoneNumber, client.phoneNumber) && Objects.equals(email, client.email);
+        if (!(o instanceof ContactPerson that)) return false;
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(paternalSurname, that.paternalSurname) && Objects.equals(maternalSurname, that.maternalSurname) && Objects.equals(phoneNumber, that.phoneNumber) && Objects.equals(idClient, that.idClient);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, paternalSurname, maternalSurname, curp, phoneNumber, email);
+        return Objects.hash(id, name, paternalSurname, maternalSurname, phoneNumber, idClient);
     }
 
     @Override
     public String toString() {
-        return "Client{" +
+        return "ContactPerson{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", paternalSurname='" + paternalSurname + '\'' +
                 ", maternalSurname='" + maternalSurname + '\'' +
-                ", curp='" + curp + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", email='" + email + '\'' +
+                ", idClient=" + idClient +
                 '}';
     }
 }
