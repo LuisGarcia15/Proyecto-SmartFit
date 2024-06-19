@@ -1,13 +1,38 @@
 #backgroundSection{
-  background-color: #eeeeee;
-  padding: 15%;
+  height: 100%;
   width: 100%;
+  background-color: #eeeeee;
+  display: flex;
+   justify-content: center;
+   align-content: center;
 }
 
 #boxLogin{
   background-color: white;
   width: 400px;
-  height: 200px;
+  height: 330px;
   text-align: center;
-  margin: 10px auto 10px auto;
+  margin: 50px 0 265px 0;
+}
+
+#inputEmail p{
+  margin: 15px 20px 0 0;
+}
+
+#inputPassword p{
+  margin: 15px 85px 0 0;
+}
+
+#changePassLink{
+  display: block;
+  margin: 0 30px 15px 0;
+}
+
+#containerButtons{
+  display: flex;
+ flex-direction: column;
+}
+
+.buttonL{
+margin: 10px 100px;
 }
