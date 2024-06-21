@@ -31,12 +31,12 @@ public class PaymentMethod {
     @OneToOne(orphanRemoval = true)
     @JoinColumn(name = "id_client_pmd")
     @NotNull
-    private Long idClient;
+    private Client idClient;
 
     public PaymentMethod() {
     }
 
-    public PaymentMethod(Long id, String fullName, String numberCard, String numberCVC, String dateCard, String flag, Long idClient) {
+    public PaymentMethod(Long id, String fullName, String numberCard, String numberCVC, String dateCard, String flag, Client idClient) {
         this.id = id;
         this.fullName = fullName;
         this.numberCard = numberCard;
@@ -94,11 +94,11 @@ public class PaymentMethod {
         this.flag = flag;
     }
 
-    public @NotNull Long getIdClient() {
+    public @NotNull Client getIdClient() {
         return idClient;
     }
 
-    public void setIdClient(@NotNull Long idClient) {
+    public void setIdClient(@NotNull Client idClient) {
         this.idClient = idClient;
     }
 

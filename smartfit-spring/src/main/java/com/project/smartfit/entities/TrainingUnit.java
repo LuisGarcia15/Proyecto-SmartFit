@@ -19,12 +19,12 @@ public class TrainingUnit {
     @OneToOne(orphanRemoval = true)
     @JoinColumn(name = "id_training_unit_address")
     @NotNull
-    private Long idTrainingUnitAddress;
+    private TrainingUnitAddress idTrainingUnitAddress;
 
     public TrainingUnit() {
     }
 
-    public TrainingUnit(Long id, String name, Long idTrainingUnitAddress) {
+    public TrainingUnit(Long id, String name, TrainingUnitAddress idTrainingUnitAddress) {
         this.id = id;
         this.name = name;
         this.idTrainingUnitAddress = idTrainingUnitAddress;
@@ -46,11 +46,11 @@ public class TrainingUnit {
         this.name = name;
     }
 
-    public @NotNull Long getIdTrainingUnitAddress() {
+    public @NotNull TrainingUnitAddress getIdTrainingUnitAddress() {
         return idTrainingUnitAddress;
     }
 
-    public void setIdTrainingUnitAddress(@NotNull Long idTrainingUnitAddress) {
+    public void setIdTrainingUnitAddress(@NotNull TrainingUnitAddress idTrainingUnitAddress) {
         this.idTrainingUnitAddress = idTrainingUnitAddress;
     }
 

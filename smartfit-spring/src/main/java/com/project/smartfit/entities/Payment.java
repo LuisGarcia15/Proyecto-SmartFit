@@ -34,12 +34,12 @@ public class Payment {
     @OneToOne(orphanRemoval = true)
     @JoinColumn(name = "id_client_pyt")
     @NotNull
-    private Long idClient;
+    private Client idClient;
 
     public Payment() {
     }
 
-    public Payment(Long id, String paymentDescription, String dueDate, String startDate, String endDate, Double totalBalance, String flag, Long idClient) {
+    public Payment(Long id, String paymentDescription, String dueDate, String startDate, String endDate, Double totalBalance, String flag, Client idClient) {
         this.id = id;
         this.paymentDescription = paymentDescription;
         this.dueDate = dueDate;
@@ -106,11 +106,11 @@ public class Payment {
         this.flag = flag;
     }
 
-    public @NotNull Long getIdClient() {
+    public @NotNull Client getIdClient() {
         return idClient;
     }
 
-    public void setIdClient(@NotNull Long idClient) {
+    public void setIdClient(@NotNull Client idClient) {
         this.idClient = idClient;
     }
 

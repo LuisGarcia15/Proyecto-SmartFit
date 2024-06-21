@@ -32,12 +32,12 @@ public class User {
     @OneToOne(orphanRemoval = true)
     @JoinColumn(name = "id_client_usr")
     @NotNull
-    private Long idClient;
+    private Client idClient;
 
     public User() {
     }
 
-    public User(Long id, String role, String user, String password, Long idClient) {
+    public User(Long id, String role, String user, String password, Client idClient) {
         this.id = id;
         this.role = role;
         this.user = user;
@@ -77,11 +77,11 @@ public class User {
         this.password = password;
     }
 
-    public @NotNull Long getIdClient() {
+    public @NotNull Client getIdClient() {
         return idClient;
     }
 
-    public void setIdClient(@NotNull Long idClient) {
+    public void setIdClient(@NotNull Client idClient) {
         this.idClient = idClient;
     }
 

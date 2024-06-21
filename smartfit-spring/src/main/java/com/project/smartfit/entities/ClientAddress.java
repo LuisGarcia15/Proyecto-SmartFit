@@ -31,12 +31,12 @@ public class ClientAddress {
     @OneToOne(orphanRemoval = true)
     @JoinColumn(name = "id_client_cls")
     @NotNull
-    private Long idClient;
+    private Client idClient;
 
     public ClientAddress() {
     }
 
-    public ClientAddress(Long id, String name, String outerNumber, String insideNumber, String state, String city, Long idClient) {
+    public ClientAddress(Long id, String name, String outerNumber, String insideNumber, String state, String city, Client idClient) {
         this.id = id;
         this.name = name;
         this.outerNumber = outerNumber;
@@ -94,11 +94,11 @@ public class ClientAddress {
         this.city = city;
     }
 
-    public @NotNull Long getIdClient() {
+    public @NotNull Client getIdClient() {
         return idClient;
     }
 
-    public void setIdClient(@NotNull Long idClient) {
+    public void setIdClient(@NotNull Client idClient) {
         this.idClient = idClient;
     }
 

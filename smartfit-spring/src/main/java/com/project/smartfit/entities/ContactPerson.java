@@ -11,9 +11,9 @@ public class ContactPerson {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "name_cpn")
+    @Column(name = "id_cpn")
     private Long id;
-    @Column(name = "paternal_surname_cpn")
+    @Column(name = "name_cpn")
     @NotNull
     private String name;
     @Column(name = "paternal_surname_cpn")
@@ -28,12 +28,12 @@ public class ContactPerson {
     @OneToOne(orphanRemoval = true)
     @JoinColumn(name = "id_client_cls")
     @NotNull
-    private Long idClient;
+    private Client idClient;
 
     public ContactPerson() {
     }
 
-    public ContactPerson(Long id, String name, String paternalSurname, String maternalSurname, String phoneNumber, Long idClient) {
+    public ContactPerson(Long id, String name, String paternalSurname, String maternalSurname, String phoneNumber, Client idClient) {
         this.id = id;
         this.name = name;
         this.paternalSurname = paternalSurname;
@@ -82,11 +82,11 @@ public class ContactPerson {
         this.phoneNumber = phoneNumber;
     }
 
-    public @NotNull Long getIdClient() {
+    public @NotNull Client getIdClient() {
         return idClient;
     }
 
-    public void setIdClient(@NotNull Long idClient) {
+    public void setIdClient(@NotNull Client idClient) {
         this.idClient = idClient;
     }
 
