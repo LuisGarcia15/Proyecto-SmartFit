@@ -128,7 +128,7 @@ public class Payment {
 
     @Override
     public String toString() {
-        return "Payment{" +
+        return "{" +
                 "id=" + id +
                 ", paymentDescription='" + paymentDescription + '\'' +
                 ", dueDate='" + dueDate + '\'' +
@@ -137,6 +137,6 @@ public class Payment {
                 ", totalBalance=" + totalBalance +
                 ", flag='" + flag + '\'' +
                 ", idClient=" + idClient +
-                '}';
+                "}\n";
     }
 }

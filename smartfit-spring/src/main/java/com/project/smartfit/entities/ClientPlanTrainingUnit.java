@@ -58,10 +58,10 @@ public class ClientPlanTrainingUnit {
 
     @Override
     public String toString() {
-        return "ClientPlanTrainingUnit{" +
+        return "{" +
                 "id=" + id +
                 ", idPlan=" + idPlan +
                 ", idTrainingUnit=" + idTrainingUnit +
-                '}';
+                "}\n";
     }
 }

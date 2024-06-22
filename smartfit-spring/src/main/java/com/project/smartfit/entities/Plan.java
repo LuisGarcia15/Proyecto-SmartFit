@@ -67,10 +67,10 @@ public class Plan {
 
     @Override
     public String toString() {
-        return "Plan{" +
+        return "{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", price=" + price +
-                '}';
+                "}\n";
     }
 }

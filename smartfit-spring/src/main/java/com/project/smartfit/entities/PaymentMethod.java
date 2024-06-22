@@ -116,7 +116,7 @@ public class PaymentMethod {
 
     @Override
     public String toString() {
-        return "PaymentMethod{" +
+        return "{" +
                 "id=" + id +
                 ", fullName='" + fullName + '\'' +
                 ", numberCard='" + numberCard + '\'' +
@@ -124,6 +124,6 @@ public class PaymentMethod {
                 ", dateCard='" + dateCard + '\'' +
                 ", flag='" + flag + '\'' +
                 ", idClient=" + idClient +
-                '}';
+                "}\n";
     }
 }

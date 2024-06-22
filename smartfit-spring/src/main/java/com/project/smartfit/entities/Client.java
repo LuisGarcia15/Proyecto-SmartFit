@@ -115,7 +115,7 @@ public class Client {
 
     @Override
     public String toString() {
-        return "Client{" +
+        return "{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", paternalSurname='" + paternalSurname + '\'' +
@@ -123,6 +123,6 @@ public class Client {
                 ", curp='" + curp + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", email='" + email + '\'' +
-                '}';
+                "}\n";
     }
 }

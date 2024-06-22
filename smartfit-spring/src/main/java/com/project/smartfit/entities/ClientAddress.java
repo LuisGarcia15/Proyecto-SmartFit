@@ -116,7 +116,7 @@ public class ClientAddress {
 
     @Override
     public String toString() {
-        return "ClientAddress{" +
+        return "{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", outerNumber='" + outerNumber + '\'' +
@@ -124,6 +124,6 @@ public class ClientAddress {
                 ", state='" + state + '\'' +
                 ", city='" + city + '\'' +
                 ", idClient=" + idClient +
-                '}';
+                "}\n";
     }
 }

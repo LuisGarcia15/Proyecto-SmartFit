@@ -55,9 +55,9 @@ public class Benefits {
 
     @Override
     public String toString() {
-        return "Benefits{" +
+        return "{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                '}';
+                "}\n";
     }
 }

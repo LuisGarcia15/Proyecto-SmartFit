@@ -26,7 +26,7 @@ public class ContactPerson {
     @NotNull
     private String phoneNumber;
     @OneToOne(orphanRemoval = true)
-    @JoinColumn(name = "id_client_cls")
+    @JoinColumn(name = "id_client_cpn")
     @NotNull
     private Client idClient;
 
@@ -104,13 +104,13 @@ public class ContactPerson {
 
     @Override
     public String toString() {
-        return "ContactPerson{" +
+        return "{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", paternalSurname='" + paternalSurname + '\'' +
                 ", maternalSurname='" + maternalSurname + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", idClient=" + idClient +
-                '}';
+                "}\n";
     }
 }

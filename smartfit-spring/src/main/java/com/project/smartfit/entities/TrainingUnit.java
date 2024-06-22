@@ -68,10 +68,10 @@ public class TrainingUnit {
 
     @Override
     public String toString() {
-        return "TrainingUnit{" +
+        return "{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", idTrainingUnitAddress=" + idTrainingUnitAddress +
-                '}';
+                "}\n";
     }
 }

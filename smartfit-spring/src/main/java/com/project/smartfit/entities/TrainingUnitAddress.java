@@ -103,13 +103,13 @@ public class TrainingUnitAddress {
 
     @Override
     public String toString() {
-        return "TrainingUnitAddress{" +
+        return "{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", outerNumber='" + outerNumber + '\'' +
                 ", insideNumber='" + insideNumber + '\'' +
                 ", state='" + state + '\'' +
                 ", city='" + city + '\'' +
-                '}';
+                "}\n";
     }
 }

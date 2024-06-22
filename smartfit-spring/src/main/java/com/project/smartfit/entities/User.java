@@ -100,12 +100,12 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "{" +
                 "id=" + id +
                 ", role='" + role + '\'' +
                 ", user='" + user + '\'' +
                 ", password='" + password + '\'' +
                 ", idClient=" + idClient +
-                '}';
+                "}\n";
     }
 }

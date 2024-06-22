@@ -38,8 +38,8 @@ public class PlanBenefits {
 
     @Override
     public String toString() {
-        return "PlanBenefits{" +
+        return "{" +
                 "id=" + id +
-                '}';
+                "}\n";
     }
 }
