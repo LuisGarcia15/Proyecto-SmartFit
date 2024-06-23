@@ -1,17 +1,20 @@
 <header>
   <nav class="navbar bg-body-tertiary" id="navigationBar">
     <div class="container-fluid" id="contentNB"> <!-- Div de la barra de nav superior-->
-      <img src="https://assets3.smartfit.com.br/assets/new-home-v4-assets/logo-dark.svg" alt="logo"
-           id="logo">
-      <a class="btn btn-light buttonNB">
+      <a class="navbar-brand" href="#" id="logo">
+        <img src="https://assets3.smartfit.com.br/assets/new-home-v4-assets/logo-dark.svg" alt="logo">
+      </a>
+      <a class="btn btn-light buttonNB" routerLink="/gimnasios">
         Gimnasios
       </a>
         <a class="btn btn-light buttonNB" routerLink="/login">
           Tu espacio
         </a>
+      @if(disabledButtons){
       <a class="btn btn-danger buttonNB">
         ¡Inscríbete ya!
       </a>
+      }
       <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
               aria-controls="offcanvasNavbar" aria-label="Toggle navigation" id="butttonNavigationBar">
         <span class="navbar-toggler-icon"></span>

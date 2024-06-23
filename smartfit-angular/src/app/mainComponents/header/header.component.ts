@@ -11,4 +11,10 @@ import { RouterLink } from '@angular/router';
 })
 export class HeaderComponent {
 
+disabledButtons: boolean = true;
+
+isButtonsDisabled(): void {
+  this.disabledButtons = !this.disabledButtons;
+}
+
 }
