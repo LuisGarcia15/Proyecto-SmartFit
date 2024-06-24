@@ -1,4 +1,4 @@
-package com.project.smartfit.configutation;
+package com.project.smartfit.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
