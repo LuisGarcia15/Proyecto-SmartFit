@@ -1,5 +1,6 @@
 package com.project.smartfit.dto;
 
+/*Clase para hacer una petición de login*/
 public class AuthenticationRequest {
 
     private String username;

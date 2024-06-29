@@ -1,5 +1,6 @@
 package com.project.smartfit.security;
 
+import com.project.smartfit.repositories.userRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +11,6 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import com.project.smartfit.repositories.userRepository;
 
 @Configuration
 public class SecurityBeanInjector {
@@ -55,10 +55,10 @@ public class SecurityBeanInjector {
     }
 
     @Bean
-    public UserDetailsService userDetailsService(){
-
-        return (user -> {
-           return userRepository.findByUser(user).orElseThrow();
-        });
+    public UserDetailsService userDetailsService() {
+        return username -> {
+            return userRepository.findByUser(username).orElseThrow();
+        };
     }
+
 }

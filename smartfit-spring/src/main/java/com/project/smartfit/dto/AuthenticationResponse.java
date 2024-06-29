@@ -1,5 +1,6 @@
 package com.project.smartfit.dto;
 
+/*Clase que contiene el token de la response de un login*/
 public class AuthenticationResponse {
 
     private String jwt;
