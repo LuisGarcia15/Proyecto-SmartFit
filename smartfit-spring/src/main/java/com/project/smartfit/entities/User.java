@@ -1,15 +1,15 @@
 package com.project.smartfit.entities;
 
+import com.project.smartfit.util.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.LinkedList;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "user")
@@ -22,9 +22,10 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_usr")
     private Long id;
+    @Enumerated(EnumType.STRING)
     @Column(name = "role_usr")
     @NotNull
-    private String role;
+    private Role role;
     @Column(name = "user_usr", unique = true)
     @NotNull
     private String user;
@@ -39,7 +40,7 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(Long id, String role, String user, String password, Client idClient) {
+    public User(Long id, Role role, String user, String password, Client idClient) {
         this.id = id;
         this.role = role;
         this.user = user;
@@ -55,11 +56,11 @@ public class User implements UserDetails {
         this.id = id;
     }
 
-    public @NotNull String getRole() {
+    public @NotNull Role getRole() {
         return role;
     }
 
-    public void setRole(@NotNull String role) {
+    public void setRole(@NotNull Role role) {
         this.role = role;
     }
 
@@ -79,10 +80,25 @@ public class User implements UserDetails {
         this.idClient = idClient;
     }
 
+    /*Mapea los permisos del rol a objetos GrantedAuthority, para crear listas
+    * de objetos GrantedAuthority*/
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if(role == null) return null;
-        return new LinkedList<>(Arrays.asList(new SimpleGrantedAuthority(this.role)));
+
+        if(role.getPermisions() == null) return null;
+
+        /*Cada enumeración de rol tiene un nombre, para pasarle ese nombre
+         * de ese rol a la implemetación de GrantedAuthority,obtenemos el nombre
+         * y se lo pasamos a una instancia de la implementación*/
+        return role.getPermisions().stream().map(each -> {
+            String permission = each.name();
+            /*Un SimpleGrantedAuthority es la implemetación de un GrantedAuthority,
+             * y necesita como argumento de su creación, el nombre del ROL*/
+            return new SimpleGrantedAuthority(permission);
+            /*Contruimos los roles como una coleción de implementaciones
+             * de GrantedAuthority*/
+        }).collect(Collectors.toList());
     }
 
     public @NotNull String getPassword() {

@@ -6,6 +6,9 @@ import com.project.smartfit.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Service
 public class AuthenticationService {
 
@@ -26,15 +29,25 @@ public class AuthenticationService {
         RegisteredUser registeredUser = new RegisteredUser();
         registeredUser.setId(user.getId());
         registeredUser.setUser(user.getUser());
-        registeredUser.setRole(user.getRole());
+        registeredUser.setRole(user.getRole().name());
 
         /*PARA GENERAR EL TOKEN, SE NECESITA UNA ENTITY USER, PUES
         * ESTA IMPLEMENTA LA INTERFAZ UserDetails Y EL MÉTODO
         * generateToker(UserDetails) NECESITA COMO PARÁMETRO
         * UN UserDetails*/
-        String token = jwtService.generateToken(user);
+        String token = jwtService.generateToken(user, generateExtraClaims(user));
         registeredUser.setToken(token);
 
         return registeredUser;
+    }
+
+    private Map<String, Object> generateExtraClaims(User user) {
+        /*Genera los extraclaims no necesarios que se pueden añadir al paylot del JWT*/
+        Map<String, Object> extraClaims = new HashMap<>();
+        extraClaims.put("user", user.getUser());
+        extraClaims.put("role", user.getRole());
+        extraClaims.put("authorities", user.getAuthorities());
+
+        return extraClaims;
     }
 }

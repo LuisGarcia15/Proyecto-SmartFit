@@ -98,16 +98,16 @@ INSERT INTO plan_benefits (id_plan_plb, id_benefits_plb) VALUES
 (3, 6);
 
 INSERT INTO user (role_usr, user_usr, password_usr, id_client_usr) VALUES 
-('CUSTOMER', 'customer1@example.com', 'Apassword1@', 1),
-('CUSTOMER', 'customer2@example.com', 'Bpassword2@', 2),
-('CUSTOMER', 'customer3@example.com', 'Cpassword3@', 3),
-('CUSTOMER', 'customer4@example.com', 'Dpassword4@', 4),
-('CUSTOMER', 'customer5@example.com', 'Epassword5@', 5),
-('CUSTOMER', 'customer6@example.com', 'Fpassword6@', 6),
-('CUSTOMER', 'customer7@example.com', 'Gpassword7@', 7),
-('CUSTOMER', 'customer8@example.com', 'Hpassword8@', 8),
-('CUSTOMER', 'customer9@example.com', 'Ipassword9@', 9),
-('CUSTOMER', 'customer10@example.com', 'Jpassword10@', 10);
+('ROLE_CUSTOMER', 'customer1@example.com', 'Apassword1@', 1),
+('ROLE_CUSTOMER', 'customer2@example.com', 'Bpassword2@', 2),
+('ROLE_CUSTOMER', 'customer3@example.com', 'Cpassword3@', 3),
+('ROLE_CUSTOMER', 'customer4@example.com', 'Dpassword4@', 4),
+('ROLE_CUSTOMER', 'customer5@example.com', 'Epassword5@', 5),
+('ROLE_CUSTOMER', 'customer6@example.com', 'Fpassword6@', 6),
+('ROLE_CUSTOMER', 'customer7@example.com', 'Gpassword7@', 7),
+('ROLE_CUSTOMER', 'customer8@example.com', 'Hpassword8@', 8),
+('ROLE_CUSTOMER', 'customer9@example.com', 'Ipassword9@', 9),
+('ROLE_CUSTOMER', 'customer10@example.com', 'Jpassword10@', 10);
 
 INSERT INTO payment (payment_description_pyt, due_date_pyt, star_date_pyt, end_date_pyt, total_balance_pyt, flag_pmd, id_client_pyt)
 VALUES 

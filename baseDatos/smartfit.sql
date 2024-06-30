@@ -145,17 +145,17 @@ CREATE TABLE user(
 id_usr				INTEGER NOT NULL AUTO_INCREMENT,
 role_usr			VARCHAR(20) NOT NULL,
 user_usr			VARCHAR(50) NOT NULL, 
-password_usr		VARCHAR(16) NOT NULL,
+password_usr		VARCHAR(200) NOT NULL,
 id_client_usr		INTEGER,
 PRIMARY KEY (id_usr),
 FOREIGN KEY (id_client_usr) REFERENCES client(id_clt) ON DELETE CASCADE,
 CONSTRAINT MINIMUM_7_CHARACTERS CHECK(CHAR_LENGTH(role_usr)>=5),
 CONSTRAINT ONLY_LETTERS CHECK(role_usr REGEXP '[^0-9]'),
-CONSTRAINT NO_SIMBOLS CHECK(role_usr REGEXP '^[A-Z ]+$'),
+CONSTRAINT NO_SIMBOLS CHECK(role_usr REGEXP '^ROLE_CUSTOMER$'),
 CONSTRAINT EMAIL CHECK(user_usr REGEXP '^[a-z0-9!#$%&*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$'),
-CONSTRAINT EXCLUSIVE_USER UNIQUE(user_usr),
-CONSTRAINT PASS_STRUCTURE CHECK(password_usr REGEXP '^[A-Z]{1}[a-z0-9]+[a-z0-9ñ@!¡#$%&¿?+*-]+'),
-CONSTRAINT PASS_SIZE CHECK(CHAR_LENGTH(password_usr)>=8 AND CHAR_LENGTH(password_usr)<=16)
+CONSTRAINT EXCLUSIVE_USER UNIQUE(user_usr)
+/*CONSTRAINT PASS_STRUCTURE CHECK(password_usr REGEXP '^[A-Z]{1}[a-z0-9]+[a-z0-9ñ@!¡#$%&¿?+*-]+'),*/
+/*CONSTRAINT PASS_SIZE CHECK(CHAR_LENGTH(password_usr)>=8 AND CHAR_LENGTH(password_usr)<=200)*/
 )DEFAULT CHARACTER SET utf8;
 /*------------------------------------------------- 5*/
 CREATE TABLE client_plan_training_unit(

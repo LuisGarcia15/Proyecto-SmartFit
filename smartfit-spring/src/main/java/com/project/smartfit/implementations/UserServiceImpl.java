@@ -3,6 +3,7 @@ package com.project.smartfit.implementations;
 import com.project.smartfit.dto.SaveUser;
 import com.project.smartfit.entities.User;
 import com.project.smartfit.services.UserService;
+import com.project.smartfit.util.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ public class UserServiceImpl implements UserService {
         user.setUser(newUser.getUser());
         /*Se encripta la contraseña para no guardarla en bruto en la BD*/
         user.setPassword(this.passwordEncoder.encode(newUser.getPassword()));
-        user.setRole("CUSTOMER");
+        user.setRole(Role.ROLE_CUSTOMER);
 
         return this.userRepository.save(user);
     }

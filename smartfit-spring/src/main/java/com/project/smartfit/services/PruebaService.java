@@ -1,25 +1,19 @@
 package com.project.smartfit.services;
 
-import com.project.smartfit.entities.Client;
-import com.project.smartfit.repositories.PruebaRepository;
+import com.project.smartfit.entities.User;
+import com.project.smartfit.repositories.userRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PruebaService {
 
     @Autowired
-    private PruebaRepository repository;
+    private userRepository repository;
 
-    public Optional<Client> findById(){
-        Optional<Client> client = this.repository.findById(1L);
-        return client;
-    }
-
-    public List<Client> findAll(){
+    public List<User> findAll(){
         return this.repository.findAll();
     }
 }
