@@ -1,4 +1,57 @@
-INSERT INTO client (name_clt, paternal_surname_clt, maternal_surname_clt, curp_clt, phone_number_clt, email_clt) VALUES 
+INSERT INTO training_unit_address (name_tru, outer_number_tru, inside_number_tru, state_tru, city_tru) VALUES 
+('CALLE UNO', 1, 1, 'ESTADO UNO', 'CIUDAD UNO'),
+('CALLE DOS', 2, 2, 'ESTADO DOS', 'CIUDAD DOS'),
+('CALLE TRES', 3, 3, 'ESTADO TRES', 'CIUDAD TRES'),
+('CALLE CUATRO', 4, 4, 'ESTADO CUATRO', 'CIUDAD CUATRO'),
+('CALLE CINCO', 5, 5, 'ESTADO CINCO', 'CIUDAD CINCO'),
+('CALLE SEIS', 6, 6, 'ESTADO SEIS', 'CIUDAD SEIS'),
+('CALLE SIETE', 7, 7, 'ESTADO SIETE', 'CIUDAD SIETE'),
+('CALLE OCHO', 8, 8, 'ESTADO OCHO', 'CIUDAD OCHO'),
+('CALLE NUEVE', 9, 9, 'ESTADO NUEVE', 'CIUDAD NUEVE'),
+('CALLE DIEZ', 10, 10, 'ESTADO DIEZ', 'CIUDAD DIEZ');
+
+INSERT INTO plan (name_pln, price_pln) VALUES 
+('PLAN BASICO', 200.00),
+('PLAN PREMIUM', 400.00),
+('PLAN ELITE', 600.00);
+
+INSERT INTO benefits (name_bns) VALUES 
+('ACCESO TODOS HORARIOS'),
+('CLASES GRUPALES'),
+('ENTRENADOR PERSONAL'),
+('ACCESO AREAS VIP'),
+('DESCUENTOS EN PRODUCTOS'),
+('ESTACIONAMIENTO');
+
+INSERT INTO plan_benefits (id_plan_plb, id_benefits_plb) VALUES 
+(1, 1),
+(1, 2),
+(2, 1),
+(2, 2),
+(2, 3),
+(2, 4),
+(3, 1),
+(3, 2),
+(3, 3),
+(3, 4),
+(3, 5),
+(3, 6);
+
+INSERT INTO training_unit (name_place_tu, id_training_unit_address) VALUES 
+('GYM UNO', 1),
+('GYM DOS', 2),
+('GYM TRES', 3),
+('GYM CUATRO', 4),
+('GYM CINCO', 5),
+('GYM SEIS', 6),
+('GYM SIETE', 7),
+('GYM OCHO', 8),
+('GYM NUEVE', 9),
+('GYM DIEZ', 10);
+
+/*Catalogos*/
+
+/*INSERT INTO client (name_clt, paternal_surname_clt, maternal_surname_clt, curp_clt, phone_number_clt, email_clt) VALUES 
 ('JUAN', 'PEREZ', 'GOMEZ', 'JPGO870101HDFLNS09', '1234567890', 'customer1@example.com'),
 ('MARIA', 'RODRIGUEZ', 'LOPEZ', 'MRLO890202MDFLRS08', '2345678901', 'customer2@example.com'),
 ('CARLOS', 'HERNANDEZ', 'MARTINEZ', 'CHMA900303HDFLRS09', '3456789012', 'customer3@example.com'),
@@ -46,57 +99,6 @@ INSERT INTO payment_method (full_name_pmd, number_card_pmd, number_cvc_pmd, date
 ('PABLO RIAZ MORALES', '9012345690123456', '901', '04-16', 'AMEX', 9),
 ('SOFIA MENDOZA GUTIERREZ', '0123456701234567', '012', '03-15', 'VISA', 10);
 
-INSERT INTO training_unit_address (name_tru, outer_number_tru, inside_number_tru, state_tru, city_tru) VALUES 
-('CALLE UNO', 1, 1, 'ESTADO UNO', 'CIUDAD UNO'),
-('CALLE DOS', 2, 2, 'ESTADO DOS', 'CIUDAD DOS'),
-('CALLE TRES', 3, 3, 'ESTADO TRES', 'CIUDAD TRES'),
-('CALLE CUATRO', 4, 4, 'ESTADO CUATRO', 'CIUDAD CUATRO'),
-('CALLE CINCO', 5, 5, 'ESTADO CINCO', 'CIUDAD CINCO'),
-('CALLE SEIS', 6, 6, 'ESTADO SEIS', 'CIUDAD SEIS'),
-('CALLE SIETE', 7, 7, 'ESTADO SIETE', 'CIUDAD SIETE'),
-('CALLE OCHO', 8, 8, 'ESTADO OCHO', 'CIUDAD OCHO'),
-('CALLE NUEVE', 9, 9, 'ESTADO NUEVE', 'CIUDAD NUEVE'),
-('CALLE DIEZ', 10, 10, 'ESTADO DIEZ', 'CIUDAD DIEZ');
-
-INSERT INTO benefits (name_bns) VALUES 
-('ACCESO TODOS HORARIOS'),
-('CLASES GRUPALES'),
-('ENTRENADOR PERSONAL'),
-('ACCESO AREAS VIP'),
-('DESCUENTOS EN PRODUCTOS'),
-('ESTACIONAMIENTO');
-
-INSERT INTO training_unit (name_place_tu, id_training_unit_address) VALUES 
-('GYM UNO', 1),
-('GYM DOS', 2),
-('GYM TRES', 3),
-('GYM CUATRO', 4),
-('GYM CINCO', 5),
-('GYM SEIS', 6),
-('GYM SIETE', 7),
-('GYM OCHO', 8),
-('GYM NUEVE', 9),
-('GYM DIEZ', 10);
-
-INSERT INTO plan (name_pln, price_pln) VALUES 
-('PLAN BASICO', 200.00),
-('PLAN PREMIUM', 400.00),
-('PLAN ELITE', 600.00);
-
-INSERT INTO plan_benefits (id_plan_plb, id_benefits_plb) VALUES 
-(1, 1),
-(1, 2),
-(2, 1),
-(2, 2),
-(2, 3),
-(2, 4),
-(3, 1),
-(3, 2),
-(3, 3),
-(3, 4),
-(3, 5),
-(3, 6);
-
 INSERT INTO user (role_usr, user_usr, password_usr, id_client_usr) VALUES 
 ('ROLE_CUSTOMER', 'customer1@example.com', 'Apassword1@', 1),
 ('ROLE_CUSTOMER', 'customer2@example.com', 'Bpassword2@', 2),
@@ -135,4 +137,4 @@ INSERT INTO client_plan_training_unit (id_client_cpl, id_plan_cpl, start_date_cp
 (7, 3, 'Junio de 2024', 7),
 (8, 3, 'Junio de 2024', 8),
 (9, 3, 'Junio de 2024', 9),
-(10, 3, 'Junio de 2024', 10);
+(10, 3, 'Junio de 2024', 10);*/

@@ -15,6 +15,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class SecurityBeanInjector {
 
+    /*Clase que se encarga de inyectar Spring Security para proveer la configuración de,
+    * autenticación, tales como obtener el AuthenticationManager que el la interfaz que
+    * provee el método de Login*/
     @Autowired
     private AuthenticationConfiguration authenticationConfiguration;
 
@@ -23,7 +26,6 @@ public class SecurityBeanInjector {
 
     @Bean
     public AuthenticationManager authenticationManager() throws Exception {
-
         /*Inyecta la implementación de AutenticationManager, que sera ProviderManager*/
         return authenticationConfiguration.getAuthenticationManager();
     }
@@ -45,6 +47,8 @@ public class SecurityBeanInjector {
         authenticationStrategy.setUserDetailsService(this.userDetailsService());
 
         return authenticationStrategy;
+        /*DaoAuthenticationProvider es una clase que permite autenticar usuarios almacenados en
+        * una base de datos*/
     }
 
     @Bean
@@ -60,6 +64,8 @@ public class SecurityBeanInjector {
         return username -> {
             return userRepository.findByUser(username).orElseThrow();
         };
+        /*Es posible retornar una Entity de User pues esta implementa
+        * la interfaz UserDetailsService*/
     }
 
 }

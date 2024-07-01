@@ -7,6 +7,11 @@ public class SaveUser {
 
     private String user;
     private String password;
+    private SaveClient client;
+    private SaveClientAddress clientAddress;
+    private SaveContactPerson contactPerson;
+    private SavePaymentMethod paymentMethod;
+    private SavePayment payment;
 
     public String getUser() {
         return user;
@@ -22,5 +27,45 @@ public class SaveUser {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public SaveClient getClient() {
+        return client;
+    }
+
+    public void setClient(SaveClient client) {
+        this.client = client;
+    }
+
+    public SaveClientAddress getClientAddress() {
+        return clientAddress;
+    }
+
+    public void setClientAddress(SaveClientAddress clientAddress) {
+        this.clientAddress = clientAddress;
+    }
+
+    public SavePayment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(SavePayment payment) {
+        this.payment = payment;
+    }
+
+    public SavePaymentMethod getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(SavePaymentMethod paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    public SaveContactPerson getContactPerson() {
+        return contactPerson;
+    }
+
+    public void setContactPerson(SaveContactPerson contactPerson) {
+        this.contactPerson = contactPerson;
     }
 }

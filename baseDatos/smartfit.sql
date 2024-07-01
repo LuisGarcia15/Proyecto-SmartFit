@@ -49,7 +49,7 @@ PRIMARY KEY (id_cls),
 FOREIGN KEY (id_client_cls) REFERENCES client(id_clt) ON DELETE CASCADE,
 CONSTRAINT MINIMUM_4_CHARACTERS_NAME CHECK(CHAR_LENGTH(name_cls)>=4 AND CHAR_LENGTH(state_cls)>=4 AND CHAR_LENGTH(city_cls)>=4),
 CONSTRAINT ONLY_LETTERS CHECK(name_cls REGEXP '[^0-9]' AND state_cls REGEXP '[^0-9]' AND city_cls REGEXP '[^0-9]'),
-CONSTRAINT NO_SIMBOLS CHECK(name_cls REGEXP '[A-ZÑÁÉÍÓÚÜ ]+$' AND state_cls REGEXP '[A-ZÑÁÉÍÓÚÜ ]+$' AND city_cls REGEXP '[A-ZÑÁÉÍÓÚÜ ]+$'),
+/*CONSTRAINT NO_SIMBOLS CHECK(name_cls REGEXP '[A-ZÑÁÉÍÓÚÜ ]+$' AND state_cls REGEXP '[A-ZÑÁÉÍÓÚÜ ]+$' AND city_cls REGEXP '[A-ZÑÁÉÍÓÚÜ ]+$'),*/
 CONSTRAINT NUMBER_FORMTAT CHECK(outer_number_cls REGEXP '^[0-9]+' AND inside_number_cls REGEXP '^[0-9]+')
 )DEFAULT CHARACTER SET utf8;
 /*------------------------------------------------- 5*/
@@ -75,7 +75,7 @@ CREATE TABLE payment(
 id_pyt	INTEGER NOT NULL AUTO_INCREMENT,
 payment_description_pyt VARCHAR(80) NOT NULL,
 due_date_pyt VARCHAR(15) NOT NULL,
-star_date_pyt VARCHAR(15) NULL,
+start_date_pyt VARCHAR(15) NULL,
 end_date_pyt VARCHAR(15) NULL,
 total_balance_pyt DOUBLE NOT NULL,
 flag_pmd VARCHAR(15) NULL,
@@ -86,7 +86,7 @@ CONSTRAINT MINIMUM_4_CHARACTERS_NAME CHECK(CHAR_LENGTH(payment_description_pyt)>
 CONSTRAINT ONLY_LETTERS CHECK(payment_description_pyt REGEXP '[^0-9]'),
 CONSTRAINT NO_SIMBOLS CHECK(payment_description_pyt REGEXP '^[A-ZÑÁÉÍÓÚÜ ]+$'),
 CONSTRAINT DUE_DATE_FORMAT CHECK(due_date_pyt REGEXP '^[0-9]{2}[-]{1}[A-Z]{3}[-]{1}[0-9]{4}$'),
-CONSTRAINT DATE_MONTH_FORMAT CHECK(star_date_pyt REGEXP '^[0-9]{2}[/]{1}[0-9]{2}[/]{1}[0-9]{4}$' AND end_date_pyt REGEXP '^[0-9]{2}[/]{1}[0-9]{2}[/]{1}[0-9]{4}$')
+CONSTRAINT DATE_MONTH_FORMAT CHECK(start_date_pyt REGEXP '^[0-9]{2}[/]{1}[0-9]{2}[/]{1}[0-9]{4}$' AND end_date_pyt REGEXP '^[0-9]{2}[/]{1}[0-9]{2}[/]{1}[0-9]{4}$')
 )DEFAULT CHARACTER SET utf8;
 /*------------------------------------------------- 5*/
 CREATE TABLE training_unit_address(

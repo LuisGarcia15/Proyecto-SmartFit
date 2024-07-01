@@ -1,6 +1,6 @@
 package com.project.smartfit.dto;
 
-/*Clase que almacena el estado de un User creadoe en la BD*/
+/*Clase que almacena el estado de un User creado en la BD*/
 public class RegisteredUser {
 
     private Long id;
@@ -39,4 +39,5 @@ public class RegisteredUser {
     public void setToken(String token) {
         this.token = token;
     }
+
 }

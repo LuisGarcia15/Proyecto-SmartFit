@@ -22,7 +22,9 @@ public class HttpSecurityConfig {
     @Bean
     /*La cadenas de filtros se construiran a partir de un builder de
     * un objeto HttpSecurity. Permite gestionar y proteger las solicitudes
-    * HTTP. Permite gestionar y proteger endpoints*/
+    * HTTP. Permite gestionar y proteger endpoints
+    * Los objetos HttoSecurity permiten configurar la seguridad web de
+    * basada en peticiones especificas*/
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
        SecurityFilterChain filterChain = httpSecurity

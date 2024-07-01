@@ -4,7 +4,7 @@ import com.project.smartfit.dto.AuthenticationRequest;
 import com.project.smartfit.dto.AuthenticationResponse;
 import com.project.smartfit.dto.RegisteredUser;
 import com.project.smartfit.dto.SaveUser;
-import com.project.smartfit.entities.User;
+import com.project.smartfit.entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,19 +22,36 @@ public class AuthenticationService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private ClientAddressService clientAddressServiceService;
+    @Autowired
+    private ClientService clientService;
+    @Autowired
+    private ContactPersonService contactPersonService;
+    @Autowired
+    private PaymentMethodService paymentMethodService;
+    @Autowired
+    private PaymentService paymentService;
+
+
     /*Se encarga de intectar la clase de jwtService*/
     @Autowired
     private JwtService jwtService;
 
     @Autowired
     /*Inycta un objeto que implementa la interfaz AuthenticationManager
-    * Objeto que e encargará del login en la aplicación*/
+    * Objeto que e encargará del login en la aplicación. Sera ProviderManager*/
     private AuthenticationManager login;
 
     /*Permite registrar un usuario en la BD y usar un dto para el logn*/
     public RegisteredUser registeredUser(SaveUser newUser){
         /*Crea un nuevo User en la BD*/
-        User user = userService.registerOneCustomer(newUser);
+        Client client = this.clientService.registerOneRegister(newUser);
+        User user = userService.registerOneCustomer(newUser, client);
+        ClientAddress clientAddress = this.clientAddressServiceService.registerOneRegister(newUser, client);
+        ContactPerson contactPerson = this.contactPersonService.registerOneRegister(newUser, client);
+        PaymentMethod paymentMethod = this.paymentMethodService.registerOneRegister(newUser, client);
+        Payment payment = this.paymentService.registerOneRegister(newUser, client);
 
         /*Poblamos el dto con el nuevo usario creado*/
         RegisteredUser registeredUser = new RegisteredUser();
