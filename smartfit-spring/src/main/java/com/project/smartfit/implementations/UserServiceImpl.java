@@ -9,6 +9,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.project.smartfit.repositories.userRepository;
 
+import java.util.Optional;
+
 /*Clase que implementa el UserService para incluir su propia lógica*/
 @Service
 public class UserServiceImpl implements UserService {
@@ -31,5 +33,10 @@ public class UserServiceImpl implements UserService {
         user.setRole(Role.ROLE_CUSTOMER);
 
         return this.userRepository.save(user);
+    }
+
+    @Override
+    public Optional<User> findByUser(String user) {
+        return this.userRepository.findByUser(user);
     }
 }

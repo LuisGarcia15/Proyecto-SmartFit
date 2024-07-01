@@ -45,7 +45,9 @@ public class HttpSecurityConfig {
                 /*------------------------------------------------------------*/
                 /*Configurarmos las rutas publicas y protegidas*/
                 .authorizeHttpRequests(authReqConfig -> {
-                    authReqConfig.requestMatchers(HttpMethod.POST,"/").permitAll();
+                    authReqConfig.requestMatchers(HttpMethod.POST,"/login/auth").permitAll();
+                    authReqConfig.requestMatchers(HttpMethod.POST,"/register").permitAll();
+                    authReqConfig.requestMatchers(HttpMethod.GET,"/login/token").permitAll();
                     /*Definimos las rutas publicas y los métodos que podemos
                     * utilizar sin login*/
                     //authReqConfig.requestMatchers(HttpMethod.POST,"/prueba/**").permitAll();

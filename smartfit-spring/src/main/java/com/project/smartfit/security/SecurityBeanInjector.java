@@ -30,7 +30,8 @@ public class SecurityBeanInjector {
 
     @Bean
     /*Un AuthenticationProvider es una interfaz que define una estrategia de
-    * autenticación */
+    * autenticación. Es la clase a la cual llamara el AuthenticationManager
+    * para login */
     public AuthenticationProvider authenticationProvider(){
 
         /*Un DaoAuthenticationProvider es una de las implemetaciones de AuthenticationProvider

@@ -3,15 +3,15 @@ package com.project.smartfit.dto;
 /*Clase para hacer una petición de login*/
 public class AuthenticationRequest {
 
-    private String username;
+    private String user;
     private String password;
 
-    public String getUsername() {
-        return username;
+    public String getUser() {
+        return user;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUser(String user) {
+        this.user = user;
     }
 
     public String getPassword() {

@@ -1,11 +1,12 @@
 package com.project.smartfit.services;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import java.security.Key;
+import javax.crypto.SecretKey;
 import java.util.Date;
 import java.util.Map;
 
@@ -14,6 +15,8 @@ public class JwtService {
 
     @Value("${security.jwt.expiration-in-minutes}")
     private Long EXPIATION_IN_MINUTES;
+
+    private SecretKey sign;
 
     /*Método que se encargara de generar el token
     * los extraclaims son data que contendra el paylot en forma de JSON,
@@ -42,8 +45,28 @@ public class JwtService {
         return jwt;
     }
 
-    private Key generateKey() {
+    private SecretKey generateKey() {
         /*Crea una llave segura gracias a un constructor propio de JWT*/
-        return Jwts.SIG.HS256.key().build();
+        if(this.sign == null){
+            this.sign = Jwts.SIG.HS256.key().build();
+        }
+        return this.sign;
+    }
+
+    public String extractUser(String jwt) {
+        /*Extraemos lo claims para retornar el user*/
+        return extractAllClaims(jwt).getSubject();
+    }
+
+    /*Devulve un objeto de tipo Claims para que,de ese objeto
+    * obtengamos el subjet del actual dueño del jwt*/
+    private Claims extractAllClaims(String jwt) {
+        /*Si cualquiera de las siguientes opcines en invalida:
+         * El formato del token es correcto, que su JSON es valido
+         * La firma debe coincidir
+         * La expiracion del token
+         * Se genera una exepción pues el jwt es incorrecto*/
+        return Jwts.parser().verifyWith(this.generateKey()).build()
+                .parseSignedClaims(jwt).getPayload();
     }
 }
