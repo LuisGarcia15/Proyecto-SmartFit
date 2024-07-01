@@ -1,0 +1,22 @@
+#searchingContainer{
+font-weight: bold;
+margin: 30px 0 30px 100px;
+}
+
+#searchingBar{
+width: 90%;
+}
+
+#wrapperContainer{
+}
+
+#filtersContainer{
+display: inline-flex;
+width: 50%;
+flex-direction: column;
+}
+
+#informationContainer{
+display: inline-flex;
+width: 50%;
+}

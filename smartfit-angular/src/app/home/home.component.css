@@ -1,0 +1,49 @@
+#mainSection{
+padding-top: 13px;
+}
+
+#sectionPromotionalImage{
+width: 100%;
+}
+
+#promotionalImage{
+display: block;
+margin: auto;
+border-radius: 30px;
+width: 99%
+}
+
+#sectionBackgroundImage{
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+
+h2{
+text-align: center;
+}
+
+span{
+color: #ffad12;
+font-weight: bold;
+}
+
+#backImage{
+display: flex;
+justify-content: center;
+align-items: center;
+border-radius: 30px;
+width: 99%;
+margin: 0px 0px 40px 0px;
+padding: 220px;
+background-image: url('https://pbs.twimg.com/profile_banners/3146251856/1558635877/1500x500');
+background-size: cover;
+background-position: center;
+}
+
+#backgroundImageButton{
+border-radius: 30px;
+padding: 15px 120px 15px 120px;
+font-weight: bold;
+}
