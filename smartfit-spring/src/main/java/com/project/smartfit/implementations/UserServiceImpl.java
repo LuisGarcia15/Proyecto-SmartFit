@@ -3,7 +3,7 @@ package com.project.smartfit.implementations;
 import com.project.smartfit.dto.SaveUser;
 import com.project.smartfit.entities.Client;
 import com.project.smartfit.entities.User;
-import com.project.smartfit.repositories.userRepository;
+import com.project.smartfit.repositories.UserRepository;
 import com.project.smartfit.services.UserService;
 import com.project.smartfit.util.Role;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService {
 
     /*Inyecta el repositorio de user*/
     @Autowired
-    private userRepository userRepository;
+    private UserRepository userRepository;
 
     /*Inyecta el bean que implemente el PasswordEncoder*/
     @Autowired

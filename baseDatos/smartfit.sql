@@ -49,7 +49,7 @@ PRIMARY KEY (id_cls),
 FOREIGN KEY (id_client_cls) REFERENCES client(id_clt) ON DELETE CASCADE,
 CONSTRAINT MINIMUM_4_CHARACTERS_NAME CHECK(CHAR_LENGTH(name_cls)>=4 AND CHAR_LENGTH(state_cls)>=4 AND CHAR_LENGTH(city_cls)>=4),
 CONSTRAINT ONLY_LETTERS CHECK(name_cls REGEXP '[^0-9]' AND state_cls REGEXP '[^0-9]' AND city_cls REGEXP '[^0-9]'),
-/*CONSTRAINT NO_SIMBOLS CHECK(name_cls REGEXP '[A-ZÑÁÉÍÓÚÜ ]+$' AND state_cls REGEXP '[A-ZÑÁÉÍÓÚÜ ]+$' AND city_cls REGEXP '[A-ZÑÁÉÍÓÚÜ ]+$'),*/
+CONSTRAINT NO_SIMBOLS CHECK(name_cls REGEXP '[A-ZÑÁÉÍÓÚÜ ]+$' AND state_cls REGEXP '[A-ZÑÁÉÍÓÚÜ ]+$' AND city_cls REGEXP '[A-ZÑÁÉÍÓÚÜ ]+$'),
 CONSTRAINT NUMBER_FORMTAT CHECK(outer_number_cls REGEXP '^[0-9]+' AND inside_number_cls REGEXP '^[0-9]+')
 )DEFAULT CHARACTER SET utf8;
 /*------------------------------------------------- 5*/
@@ -114,13 +114,13 @@ CONSTRAINT NO_SIMBOLS CHECK(name_bns REGEXP '[A-ZÑÁÉÍÓÚÜ ]+$')
 /*------------------------------------------------- 5*/
 CREATE TABLE training_unit(
 id_tru	INTEGER NOT NULL AUTO_INCREMENT,
-name_place_tu VARCHAR(80) NOT NULL,
+name_place_tru VARCHAR(80) NOT NULL,
 id_training_unit_address INTEGER NOT NULL,
 PRIMARY KEY (id_tru),
 FOREIGN KEY (id_training_unit_address) REFERENCES training_unit_address(id_tru),
-CONSTRAINT MINIMUM_4_CHARACTERS_NAME CHECK(CHAR_LENGTH(name_place_tu)>=4),
-CONSTRAINT ONLY_LETTERS CHECK(name_place_tu REGEXP '[^0-9]'),
-CONSTRAINT NO_SIMBOLS CHECK(name_place_tu REGEXP '[A-ZÑÁÉÍÓÚÜ ]+$')
+CONSTRAINT MINIMUM_4_CHARACTERS_NAME CHECK(CHAR_LENGTH(name_place_tru)>=4),
+CONSTRAINT ONLY_LETTERS CHECK(name_place_tru REGEXP '[^0-9]'),
+CONSTRAINT NO_SIMBOLS CHECK(name_place_tru REGEXP '[A-ZÑÁÉÍÓÚÜ ]+$')
 )DEFAULT CHARACTER SET utf8;
 /*------------------------------------------------- 5*/
 CREATE TABLE plan(
@@ -169,3 +169,55 @@ FOREIGN KEY (id_plan_cpl) REFERENCES plan(id_pln),
 FOREIGN KEY (id_training_unit_cpl) REFERENCES training_unit(id_tru),
 CONSTRAINT FORMAT_DATE CHECK(start_date_cpl REGEXP '^[A-Z]{1}[a-z]+[[:space:]]{1}de[[:space:]]{1}[0-9]{4}')
 )DEFAULT CHARACTER SET utf8;
+
+/******** INSERT ********/
+INSERT INTO training_unit_address (name_tru, outer_number_tru, inside_number_tru, state_tru, city_tru) VALUES 
+('CALLE UNO', 1, 1, 'ESTADO UNO', 'CIUDAD UNO'),
+('CALLE DOS', 2, 2, 'ESTADO DOS', 'CIUDAD DOS'),
+('CALLE TRES', 3, 3, 'ESTADO TRES', 'CIUDAD TRES'),
+('CALLE CUATRO', 4, 4, 'ESTADO CUATRO', 'CIUDAD CUATRO'),
+('CALLE CINCO', 5, 5, 'ESTADO CINCO', 'CIUDAD CINCO'),
+('CALLE SEIS', 6, 6, 'ESTADO SEIS', 'CIUDAD SEIS'),
+('CALLE SIETE', 7, 7, 'ESTADO SIETE', 'CIUDAD SIETE'),
+('CALLE OCHO', 8, 8, 'ESTADO OCHO', 'CIUDAD OCHO'),
+('CALLE NUEVE', 9, 9, 'ESTADO NUEVE', 'CIUDAD NUEVE'),
+('CALLE DIEZ', 10, 10, 'ESTADO DIEZ', 'CIUDAD DIEZ');
+
+INSERT INTO plan (name_pln, price_pln) VALUES 
+('PLAN BASICO', 200.00),
+('PLAN PREMIUM', 400.00),
+('PLAN ELITE', 600.00);
+
+INSERT INTO benefits (name_bns) VALUES 
+('ACCESO TODOS HORARIOS'),
+('CLASES GRUPALES'),
+('ENTRENADOR PERSONAL'),
+('ACCESO AREAS VIP'),
+('DESCUENTOS EN PRODUCTOS'),
+('ESTACIONAMIENTO');
+
+INSERT INTO plan_benefits (id_plan_plb, id_benefits_plb) VALUES 
+(1, 1),
+(1, 2),
+(2, 1),
+(2, 2),
+(2, 3),
+(2, 4),
+(3, 1),
+(3, 2),
+(3, 3),
+(3, 4),
+(3, 5),
+(3, 6);
+
+INSERT INTO training_unit (name_place_tru, id_training_unit_address) VALUES 
+('GYM UNO', 1),
+('GYM DOS', 2),
+('GYM TRES', 3),
+('GYM CUATRO', 4),
+('GYM CINCO', 5),
+('GYM SEIS', 6),
+('GYM SIETE', 7),
+('GYM OCHO', 8),
+('GYM NUEVE', 9),
+('GYM DIEZ', 10);

@@ -32,6 +32,8 @@ public class AuthenticationService {
     private PaymentMethodService paymentMethodService;
     @Autowired
     private PaymentService paymentService;
+    @Autowired
+    private ClientPlanTrainingUnitService clientPlanTrainingUnitService;
 
 
     /*Se encarga de intectar la clase de jwtService*/
@@ -52,6 +54,8 @@ public class AuthenticationService {
         ContactPerson contactPerson = this.contactPersonService.registerOneRegister(newUser, client);
         PaymentMethod paymentMethod = this.paymentMethodService.registerOneRegister(newUser, client);
         Payment payment = this.paymentService.registerOneRegister(newUser, client);
+        ClientPlanTrainingUnit clientPlanTrainingUnit = this.clientPlanTrainingUnitService
+                .registerOneRegister(newUser, client);
 
         /*Poblamos el dto con el nuevo usario creado*/
         RegisteredUser registeredUser = new RegisteredUser();

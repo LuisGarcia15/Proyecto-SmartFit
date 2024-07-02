@@ -12,6 +12,7 @@ public class SaveUser {
     private SaveContactPerson contactPerson;
     private SavePaymentMethod paymentMethod;
     private SavePayment payment;
+    private SaveClientPlanTrainingUnit clientPlanTrainingUnit;
 
     public String getUser() {
         return user;
@@ -67,5 +68,13 @@ public class SaveUser {
 
     public void setContactPerson(SaveContactPerson contactPerson) {
         this.contactPerson = contactPerson;
+    }
+
+    public SaveClientPlanTrainingUnit getClientPlanTrainingUnit() {
+        return clientPlanTrainingUnit;
+    }
+
+    public void setClientPlanTrainingUnit(SaveClientPlanTrainingUnit clientPlanTrainingUnit) {
+        this.clientPlanTrainingUnit = clientPlanTrainingUnit;
     }
 }

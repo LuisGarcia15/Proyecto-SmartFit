@@ -11,9 +11,9 @@ public class TrainingUnit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_tu")
+    @Column(name = "id_tru")
     private Long id;
-    @Column(name = "name_place_tu")
+    @Column(name = "name_place_tru")
     @NotNull
     private String name;
     @OneToOne(orphanRemoval = true)

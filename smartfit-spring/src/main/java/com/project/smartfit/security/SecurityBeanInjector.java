@@ -1,6 +1,6 @@
 package com.project.smartfit.security;
 
-import com.project.smartfit.repositories.userRepository;
+import com.project.smartfit.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,7 +22,7 @@ public class SecurityBeanInjector {
     private AuthenticationConfiguration authenticationConfiguration;
 
     @Autowired
-    private userRepository userRepository;
+    private UserRepository userRepository;
 
     @Bean
     public AuthenticationManager authenticationManager() throws Exception {
