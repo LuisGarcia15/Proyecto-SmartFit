@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -35,7 +36,6 @@ public class AuthenticationService {
     @Autowired
     private ClientPlanTrainingUnitService clientPlanTrainingUnitService;
 
-
     /*Se encarga de intectar la clase de jwtService*/
     @Autowired
     private JwtService jwtService;
@@ -43,11 +43,12 @@ public class AuthenticationService {
     @Autowired
     /*Inycta un objeto que implementa la interfaz AuthenticationManager
     * Objeto que e encargará del login en la aplicación. Sera ProviderManager*/
-    private AuthenticationManager login;
+    private AuthenticationManager authenticationManager;
 
     /*Permite registrar un usuario en la BD y usar un dto para el logn*/
     public RegisteredUser registeredUser(SaveUser newUser){
-        /*Crea un nuevo User en la BD*/
+        /*Crea un nuevo User en la BD, LOS SIGUIENTES MÉTODOS REGISTRAN
+        * LA INFORMACIÓN DE UN NUEVO USUARIO EN LA BD*/
         Client client = this.clientService.registerOneRegister(newUser);
         User user = userService.registerOneCustomer(newUser, client);
         ClientAddress clientAddress = this.clientAddressServiceService.registerOneRegister(newUser, client);
@@ -57,7 +58,8 @@ public class AuthenticationService {
         ClientPlanTrainingUnit clientPlanTrainingUnit = this.clientPlanTrainingUnitService
                 .registerOneRegister(newUser, client);
 
-        /*Poblamos el dto con el nuevo usario creado*/
+        /*Poblamos el dto con el nuevo usuario creado, esta clase nos sirve para mostrar el JWT
+        * formado para un nuevo usuario*/
         RegisteredUser registeredUser = new RegisteredUser();
         registeredUser.setId(user.getId());
         registeredUser.setUser(user.getUser());
@@ -67,7 +69,7 @@ public class AuthenticationService {
         * ESTA IMPLEMENTA LA INTERFAZ UserDetails Y EL MÉTODO
         * generateToker(UserDetails) NECESITA COMO PARÁMETRO
         * UN UserDetails*/
-        String token = jwtService.generateToken(user, generateExtraClaims(user));
+        String token = jwtService.generateJWT(user, generateExtraClaims(user));
         registeredUser.setToken(token);
 
         return registeredUser;
@@ -84,21 +86,28 @@ public class AuthenticationService {
     }
 
     public AuthenticationResponse login(AuthenticationRequest authenticationRequest) {
+        /*ESTE MÉTODO AUTENTICA UN USUARIO, PERO NO COLOCA EL OBJETO AUTHENTICATION EN EL
+        * SECURITYCONTEXTHOLDER, YA QUE ESTE MÉTODO SOLO SE ENCARGA DE AUTENTICAR
+        *
+        * COLOCAR EL AUTHENTICATION EN EL SECURITYCONTEXTHOLDER SERA EL ENCARGADO
+        * JWTAUTHORIZATIONFILTER*/
         Authentication authentication = new UsernamePasswordAuthenticationToken(
                 authenticationRequest.getUser(), authenticationRequest.getPassword()
         );
         /*Se realiza el proceso de Login. Recordemos que un AuthenticationManager tiene
         * el método authenticate() para realizar el login*/
-        this.login.authenticate(authentication);
+        this.authenticationManager.authenticate(authentication);
         /*Obtenemos los detalles del usuario que se avaba de logear de la BD*/
         UserDetails user = this.userService.findByUser(authenticationRequest.getUser()).get();
-        /*Generamos el Token del user*/
-        String jwt = this.jwtService.generateToken(user, generateExtraClaims((User) user));
+        /*Generamos el Token del user unicmante para devolverlo, NO LO NECESITA EL MÉTODO AUTHENTICATE
+        * COMO PARÁMETRO, este método es el encargado de realizar el login*/
+        String jwt = this.jwtService.generateJWT(user, generateExtraClaims((User) user));
         /*Genermaos el DTO de login*/
         AuthenticationResponse response = new AuthenticationResponse(jwt);
         return response;
     }
 
+    /*MÉTODO DE VALIDACIÓN DE TOKEN*/
     public boolean validateToken(String jwt) {
         /*Validar que:
         * El formato del token es correcto, que su JSON es valido
@@ -106,11 +115,37 @@ public class AuthenticationService {
         * La expiracion del token*/
         /*Extraeremos un claim para validar las tres cosas al mismo tiempo*/
         try {
-            this.jwtService.extractUser(jwt);
+            this.jwtService.extractSubject(jwt);
             return true;
         }catch (Exception e){
             System.out.println(e.getMessage());
             return false;
         }
+    }
+
+    public User findLogguedUser() {
+        /*Obtenemos el usuario logueado del SpringSecurityCotnext, como
+        * el usuario se encuentra en un objeto Authentication, obtenemos
+        * el usuario loggueado en un objero Authentication*/
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        /*Si auth es una implementación de Authenticathion de la clase
+        * UsernamePasswordAuthenticathionToken, se parcea la variable
+        * auth a authToken solo que ahora es de la clase
+        * UsernamePassswordAuthnticationToken.
+        *
+        * Esto es así ya que en el JwtAuthenticationFilter, colocamos
+        * un objeto de tipo UsernamePassworsAuthenticationFilter como
+        * objeto Authorization en el SecurityContextHolder
+        *
+        * El if NO es necesario, puesto que solo estamos manjando un
+        * tipo de autenticación el cual es DoAuthenticationProvider
+        * pero es una manera de ejemplificar como se trabajaría para
+        * un sistema con más autenticaciones*/
+        if(auth instanceof UsernamePasswordAuthenticationToken authToken){
+            String username = (String) authToken.getPrincipal();
+
+            return userService.findByUser(username).orElseThrow();
+        }
+        return null;
     }
 }

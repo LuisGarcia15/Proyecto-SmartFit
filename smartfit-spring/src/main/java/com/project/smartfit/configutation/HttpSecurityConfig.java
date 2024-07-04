@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity/*Anotación que permite encontrar una clase de configuración
@@ -19,6 +20,9 @@ public class HttpSecurityConfig {
     @Autowired
     private AuthenticationProvider daoAuthenticationProvider;
 
+    @Autowired
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
+
     @Bean
     /*La cadenas de filtros se construiran a partir de un builder de
     * un objeto HttpSecurity. Permite gestionar y proteger las solicitudes
@@ -27,7 +31,14 @@ public class HttpSecurityConfig {
     * basada en peticiones especificas*/
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 
+        /*TODOS LOS MÉTODOS DE HTTPSECURITY NO SON FILTROS, SON CONFIGURACIONES DE
+        * SEGURIDAD HTTP ASI COMO DE LOS ENDPOINS, PERO PODEMOS AGREGAR FILTROS DE
+        * SEGURIDAD CON ADDFILTERBEFORE() O ADDFILTERAFTER() PARA AGREGAR UN FILTRO
+        * A LA CADENA DE FILTROS DE SEGURIDAD*/
        SecurityFilterChain filterChain = httpSecurity
+               /*Se está agregando un filtro de seguridad pero que se ejecutará antes del
+               * filtro de seguridad de UssernamePasswordAuthentication*/
+               .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .csrf(csrfConfig -> csrfConfig.disable())
                 /*Seguridad llamada CrossSideRequestForgery, habilita
                 seguridad contra este tipo de ataques. Usa intercambio de

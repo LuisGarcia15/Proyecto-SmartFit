@@ -15,7 +15,10 @@ import java.util.stream.Collectors;
 @Table(name = "user")
 /*UserDetails
 * Es una representación de encapsular la información de un usuario que sera
-* envuelto por un objeto Authentication*/
+* envuelto por un objeto Authentication.
+* Es una interfaz que define un contrato para representar la información
+* del usuario que Spring Security necesita para la autenticación y autorización
+* y que sera parte de un objeto Authentication*/
 public class User implements UserDetails {
 
     @Id

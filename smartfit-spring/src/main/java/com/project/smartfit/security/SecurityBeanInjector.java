@@ -59,13 +59,21 @@ public class SecurityBeanInjector {
         return new BCryptPasswordEncoder();
     }
 
+
+    /*UserDetailsSerive
+     * Es una interfaz que define un contrato para cargar los datos de un usuario
+     * específico en función del nombre de usuario.*/
     @Bean
     public UserDetailsService userDetailsService() {
-        return username -> {
-            return userRepository.findByUser(username).orElseThrow();
+        /*SE UTILIZA UNA EXPRESION LAMDA PUES ES UNA INTERFAZ FUNCIONAL CUYO UNICO
+        * MÉTODO ES BUSCAR UN USUARIO POR UN USERNAME Y RETORNAR EL OBJETO USERDETAILS
+        * QUE TENGA ESE USERNAME*/
+        return user -> {
+            return userRepository.findByUser(user).orElseThrow();
         };
         /*Es posible retornar una Entity de User pues esta implementa
-        * la interfaz UserDetailsService*/
+        * la interfaz UserDetails y la función de un UserDetailsService
+        * es retornar el usuario necesario para la autorización y autenticación*/
     }
 
 }
