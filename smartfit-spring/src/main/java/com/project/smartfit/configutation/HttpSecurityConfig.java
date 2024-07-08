@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -14,7 +15,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity/*Anotación que permite encontrar una clase de configuración
 y aplicar la configuración de seguridad a toda la app. Tambien activa y configura
-ciertos componentes como la configuració de AuthenticationConfiguration*/
+ciertos componentes como la configuración de AuthenticationConfiguration ya que
+permite inyectar aquellos componentes para configurar la seguridad por HTTP request*/
+@EnableMethodSecurity(prePostEnabled = true)/*Anotación que permite intectar componentes para configurar
+la seguridad por métodos basado en OAP. Sus anotaciones pueden ser aplicadas a un Controller o derivados
+(como Service o  Repository). Ya que no distingue, solo debe ser un Controller*/
 public class HttpSecurityConfig {
 
     @Autowired
@@ -36,6 +41,7 @@ public class HttpSecurityConfig {
         * SEGURIDAD CON ADDFILTERBEFORE() O ADDFILTERAFTER() PARA AGREGAR UN FILTRO
         * A LA CADENA DE FILTROS DE SEGURIDAD*/
        SecurityFilterChain filterChain = httpSecurity
+               .securityMatcher("/login", "/register")
                /*Se está agregando un filtro de seguridad pero que se ejecutará antes del
                * filtro de seguridad de UssernamePasswordAuthentication*/
                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)

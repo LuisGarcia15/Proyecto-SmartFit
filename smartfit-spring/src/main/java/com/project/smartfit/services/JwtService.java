@@ -4,6 +4,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,8 @@ import java.util.Date;
 import java.util.Map;
 
 @Service
-public class JwtService {
+public class
+JwtService {
 
     @Value("${security.jwt.expiration-in-minutes}")
     private Long EXPIATION_IN_MINUTES;
@@ -86,5 +88,22 @@ public class JwtService {
          * extraer el subject con el JWT que enviamos, retornará el
          * subject, sino, retornará una excepción. Verifica que el JWT
          * este correctamente firmado con la clave original*/
+    }
+
+    public String extractJwtFromRequest(HttpServletRequest request) {
+
+        //1-.Obtener encabezado http llamado Authorization
+        String authorizationHeader = request.getHeader("Authorization");//Bearer JWT
+        if( authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")){
+            /*Si el header de Authorization NO tiene el JWT, retornamos null*/
+            return null;
+        }
+        //2-. Obtener JWT desde el encabezado
+        String jwt = authorizationHeader.split(" ")[1];
+        return jwt;
+    }
+
+    public Date extractExpiration(String jwt) {
+        return this.extractAllClaims(jwt).getExpiration();
     }
 }

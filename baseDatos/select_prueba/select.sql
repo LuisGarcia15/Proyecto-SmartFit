@@ -1,3 +1,4 @@
+SELECT * FROM jwt_token; /*borrar cascada*/
 SELECT * FROM user; /*borrar cascada*/
 SELECT * FROM contact_person; /*borrar cascada*/
 SELECT * FROM client_address; /*borrar cascada*/

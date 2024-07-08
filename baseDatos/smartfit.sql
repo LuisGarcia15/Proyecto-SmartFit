@@ -158,6 +158,17 @@ CONSTRAINT EXCLUSIVE_USER UNIQUE(user_usr)
 /*CONSTRAINT PASS_SIZE CHECK(CHAR_LENGTH(password_usr)>=8 AND CHAR_LENGTH(password_usr)<=200)*/
 )DEFAULT CHARACTER SET utf8;
 /*------------------------------------------------- 5*/
+CREATE TABLE jwt_token(
+id_tkn				INTEGER NOT NULL AUTO_INCREMENT,
+token_tkn			VARCHAR(2048) NOT NULL,
+date_expiration_tkn	VARCHAR(50) NOT NULL, 
+is_valid_tkn 			BOOLEAN NOT NULL,
+id_user_tkn		INTEGER NOT NULL,
+PRIMARY KEY (id_tkn),
+FOREIGN KEY (id_user_tkn) REFERENCES user(id_usr) ON DELETE CASCADE,
+CONSTRAINT EXCLUSIVE_TOKEN UNIQUE(token_tkn)
+)DEFAULT CHARACTER SET utf8;
+/*------------------------------------------------- 5*/
 CREATE TABLE client_plan_training_unit(
 id_client_cpl INTEGER NOT NULL,
 start_date_cpl VARCHAR(15) NOT NULL,
