@@ -5,12 +5,18 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity/*Anotación que permite encontrar una clase de configuración
@@ -40,43 +46,69 @@ public class HttpSecurityConfig {
         * SEGURIDAD HTTP ASI COMO DE LOS ENDPOINS, PERO PODEMOS AGREGAR FILTROS DE
         * SEGURIDAD CON ADDFILTERBEFORE() O ADDFILTERAFTER() PARA AGREGAR UN FILTRO
         * A LA CADENA DE FILTROS DE SEGURIDAD*/
-       SecurityFilterChain filterChain = httpSecurity
-               .securityMatcher("/login", "/register")
-               /*Se está agregando un filtro de seguridad pero que se ejecutará antes del
-               * filtro de seguridad de UssernamePasswordAuthentication*/
-               .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-                .csrf(csrfConfig -> csrfConfig.disable())
-                /*Seguridad llamada CrossSideRequestForgery, habilita
-                seguridad contra este tipo de ataques. Usa intercambio de
-                Tokens. Es usada en sesiones StateFul. Como usamos JWT no
-                es necesario. La expresion Lambda toma un objeto de configuración
-                y lo desabiita*/
-                .sessionManagement(sesisionConfig ->
-                sesisionConfig.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                /*Define el tipo de sesión de la app. En este caso Stateless pues
-                * usamos JWT para la seguridad. Recibe una enum que representa diferentes
-                * politicas para la creación de sesiones web de SPRING SECURITY. Cada
-                * constante define una politica especifica para la creación de una sesión*/
-                .authenticationProvider(daoAuthenticationProvider)
-                /*Colocamos la estrategis de autenticación que usaremos,
-                * en este caso una implementacipón de un auuthenticationProvider
-                * que sera un daoAuthenticationProvider para usar tokens de JWT*/
-                /*------------------------------------------------------------*/
-                /*Configurarmos las rutas publicas y protegidas*/
-                .authorizeHttpRequests(authReqConfig -> {
-                    authReqConfig.requestMatchers(HttpMethod.POST,"/login/auth").permitAll();
-                    authReqConfig.requestMatchers(HttpMethod.POST,"/register").permitAll();
-                    authReqConfig.requestMatchers(HttpMethod.GET,"/login/token").permitAll();
-                    /*Definimos las rutas publicas y los métodos que podemos
-                    * utilizar sin login*/
-                    //authReqConfig.requestMatchers(HttpMethod.POST,"/prueba/**").permitAll();
-                    /*ES NECESARIO DEFINIR LOS ENDPOINTS PRIVADOS, aún ya se
-                    * hayan definido los endpoints publicos, en este caso, todos aquellos
-                    * andpoints que no sean los publicos, a continuación: -->*/
-                    authReqConfig.anyRequest().authenticated();
+        return httpSecurity
+                        .cors(Customizer.withDefaults())
+                        /*Permite habilitar cors en Spring. Es necesario para habilitar
+                        * la anotación @CrossOrigin. Añade el CorsFilter a la cadena de
+                        * filtros de segguridad
+                        *
+                        * A su vez, permite habilitar el bean de configuración para
+                        * ionyectar la configuración de CORS por bean*/
+                        .securityMatcher("/login", "/register")
+                        /*Se está agregando un filtro de seguridad pero que se ejecutará antes del
+                        * filtro de seguridad de UssernamePasswordAuthentication*/
+                        .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                         .csrf(csrfConfig -> csrfConfig.disable())
+                         /*Seguridad llamada CrossSideRequestForgery, habilita
+                         seguridad contra este tipo de ataques. Usa intercambio de
+                         Tokens. Es usada en sesiones StateFul. Como usamos JWT no
+                         es necesario. La expresion Lambda toma un objeto de configuración
+                         y lo desabiita*/
+                         .sessionManagement(sesisionConfig ->
+                         sesisionConfig.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                         /*Define el tipo de sesión de la app. En este caso Stateless pues
+                         * usamos JWT para la seguridad. Recibe una enum que representa diferentes
+                         * politicas para la creación de sesiones web de SPRING SECURITY. Cada
+                         * constante define una politica especifica para la creación de una sesión*/
+                         .authenticationProvider(daoAuthenticationProvider)
+                         /*Colocamos la estrategis de autenticación que usaremos,
+                         * en este caso una implementacipón de un auuthenticationProvider
+                         * que sera un daoAuthenticationProvider para usar tokens de JWT*/
+                         /*------------------------------------------------------------*/
+                         /*Configurarmos las rutas publicas y protegidas*/
+                         .authorizeHttpRequests(authReqConfig -> {
+                             authReqConfig.requestMatchers(HttpMethod.POST,"/login/auth").permitAll();
+                             authReqConfig.requestMatchers(HttpMethod.POST,"/register").permitAll();
+                             authReqConfig.requestMatchers(HttpMethod.GET,"/login/token").permitAll();
+                             /*Definimos las rutas publicas y los métodos que podemos
+                             * utilizar sin login*/
+                             //authReqConfig.requestMatchers(HttpMethod.POST,"/prueba/**").permitAll();
+                             /*ES NECESARIO DEFINIR LOS ENDPOINTS PRIVADOS, aún ya se
+                             * hayan definido los endpoints publicos, en este caso, todos aquellos
+                             * andpoints que no sean los publicos, a continuación: -->*/
+                             authReqConfig.anyRequest().authenticated();
 
-                })
-                .build();
-                return filterChain;
+                         })
+                         .build();
+    }
+
+    /*Es el equivalente a CorsFilter en SpringFramework*/
+    @Bean
+    CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("*"));
+        /*Permite habilitar los origins*/
+        configuration.setAllowedMethods(Arrays.asList("GET","POST"));
+        /*Permite habilitar los métodos*/
+        configuration.setAllowedHeaders(Arrays.asList("*"));
+        /*Permite habilitar los headres*/
+        configuration.setAllowCredentials(true);
+        /*Permite habilitar las credenciales como cookies o el mismo
+        * header Auhotization que se necesita para pasar el JWT*/
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        /*Configura el patrón al cual va a afectar cors de que controladores*/
+        return source;
     }
 }

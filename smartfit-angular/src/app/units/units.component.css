@@ -8,15 +8,30 @@ width: 90%;
 }
 
 #wrapperContainer{
+    display: flex;
 }
 
 #filtersContainer{
 display: inline-flex;
-width: 50%;
+width: 20%;
 flex-direction: column;
+margin-left: 50px;
+}
+
+.checkboxItems {
+    display: flex;
+    align-items: center;
+}
+.checkboxItems p {
+    margin: 0;
+    padding-left: 10px;
 }
 
 #informationContainer{
 display: inline-flex;
 width: 50%;
+}
+
+.card{
+    height: 200px;
 }

@@ -10,6 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+//@CrossOrigin
+/*CrossOrigin sin parametros permite cualquier peticion de cualquier origen.
+* A nivel de clase admite peticiones a todos los métodos. A nivel de método
+* solo aceptamos en ese método.
+* El parámetro origins permite ingresar como string una URL o un array de
+* Strins URL que son los origenes que acepta*/
 @RestController
 @RequestMapping("/login")
 public class LoginController {
