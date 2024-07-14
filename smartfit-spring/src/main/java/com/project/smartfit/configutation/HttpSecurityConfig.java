@@ -12,11 +12,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
-import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity/*Anotación que permite encontrar una clase de configuración
@@ -86,29 +81,29 @@ public class HttpSecurityConfig {
                              /*ES NECESARIO DEFINIR LOS ENDPOINTS PRIVADOS, aún ya se
                              * hayan definido los endpoints publicos, en este caso, todos aquellos
                              * andpoints que no sean los publicos, a continuación: -->*/
-                             authReqConfig.anyRequest().authenticated();
+                             authReqConfig.anyRequest().permitAll();
 
                          })
                          .build();
     }
 
     /*Es el equivalente a CorsFilter en SpringFramework*/
-    @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("*"));
-        /*Permite habilitar los origins*/
-        configuration.setAllowedMethods(Arrays.asList("GET","POST"));
-        /*Permite habilitar los métodos*/
-        configuration.setAllowedHeaders(Arrays.asList("*"));
-        /*Permite habilitar los headres*/
-        configuration.setAllowCredentials(true);
-        /*Permite habilitar las credenciales como cookies o el mismo
-        * header Auhotization que se necesita para pasar el JWT*/
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        /*Configura el patrón al cual va a afectar cors de que controladores*/
-        return source;
-    }
+//    @Bean
+//    public CorsConfigurationSource corsConfigurationSource() {
+//        CorsConfiguration configuration = new CorsConfiguration();
+//        configuration.setAllowedOrigins(Arrays.asList("*"));
+//        /*Permite habilitar los origins*/
+//        configuration.setAllowedMethods(Arrays.asList("GET","POST"));
+//        /*Permite habilitar los métodos*/
+//        configuration.setAllowedHeaders(Arrays.asList("*"));
+//        /*Permite habilitar los headres*/
+//        configuration.setAllowCredentials(true);
+//        /*Permite habilitar las credenciales como cookies o el mismo
+//        * header Auhotization que se necesita para pasar el JWT*/
+//
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", configuration);
+//        /*Configura el patrón al cual va a afectar cors de que controladores*/
+//        return source;
+//    }
 }

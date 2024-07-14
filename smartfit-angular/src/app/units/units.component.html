@@ -40,14 +40,17 @@
     </aside>
     <section id="informationContainer">
       <!-- Info Gyms -->
+      <!-- @if(this.arrayComplete){-->
+        @for (unit of this.units; track unit.name) {
       <div class="card" style="width: 18rem;">
-        <img src="..." class="card-img-top" alt="GYMS">
+        <img src="..." class="card-img-top" alt="foto-descriptiva">
         <div class="card-body">
-          <h5 class="card-title">Titulo de GYM</h5>
-          <p class="card-text">Dirección de GYM</p>
-          <a href="#" class="btn btn-primary">Botón de Inscripción</a>
+          <h5 class="card-title">{{unit.name}}</h5>
+          <p class="card-text">{{this.getFullAddress(unit.idTrainingUnitAddress)}}</p>
+          <a class="btn btn-primary" routerLink="/test" (click)="showDetailsUnit(unit)">Botón de Inscripción</a>
         </div>
       </div>
+      }
       <!-- Info Gyms -->
     </section>
   </div>

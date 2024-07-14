@@ -185,14 +185,7 @@ CONSTRAINT FORMAT_DATE CHECK(start_date_cpl REGEXP '^[A-Z]{1}[a-z]+[[:space:]]{1
 INSERT INTO training_unit_address (name_tru, outer_number_tru, inside_number_tru, state_tru, city_tru) VALUES 
 ('CALLE UNO', 1, 1, 'ESTADO UNO', 'CIUDAD UNO'),
 ('CALLE DOS', 2, 2, 'ESTADO DOS', 'CIUDAD DOS'),
-('CALLE TRES', 3, 3, 'ESTADO TRES', 'CIUDAD TRES'),
-('CALLE CUATRO', 4, 4, 'ESTADO CUATRO', 'CIUDAD CUATRO'),
-('CALLE CINCO', 5, 5, 'ESTADO CINCO', 'CIUDAD CINCO'),
-('CALLE SEIS', 6, 6, 'ESTADO SEIS', 'CIUDAD SEIS'),
-('CALLE SIETE', 7, 7, 'ESTADO SIETE', 'CIUDAD SIETE'),
-('CALLE OCHO', 8, 8, 'ESTADO OCHO', 'CIUDAD OCHO'),
-('CALLE NUEVE', 9, 9, 'ESTADO NUEVE', 'CIUDAD NUEVE'),
-('CALLE DIEZ', 10, 10, 'ESTADO DIEZ', 'CIUDAD DIEZ');
+('CALLE TRES', 3, 3, 'ESTADO TRES', 'CIUDAD TRES');
 
 INSERT INTO plan (name_pln, price_pln) VALUES 
 ('PLAN BASICO', 200.00),
@@ -224,11 +217,4 @@ INSERT INTO plan_benefits (id_plan_plb, id_benefits_plb) VALUES
 INSERT INTO training_unit (name_place_tru, id_training_unit_address) VALUES 
 ('GYM UNO', 1),
 ('GYM DOS', 2),
-('GYM TRES', 3),
-('GYM CUATRO', 4),
-('GYM CINCO', 5),
-('GYM SEIS', 6),
-('GYM SIETE', 7),
-('GYM OCHO', 8),
-('GYM NUEVE', 9),
-('GYM DIEZ', 10);
+('GYM TRES', 3);

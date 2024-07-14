@@ -29,9 +29,14 @@ margin-left: 50px;
 
 #informationContainer{
 display: inline-flex;
-width: 50%;
+width: 100%;
+flex-wrap: wrap;
 }
 
 .card{
-    height: 200px;
+    margin: 10px;
+}
+
+#prueba{
+    margin: 20px;
 }

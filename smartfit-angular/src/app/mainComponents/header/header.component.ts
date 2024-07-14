@@ -1,6 +1,5 @@
-import { Component, Output, EventEmitter } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { RouterLink } from '@angular/router';
+import { Component} from '@angular/core';
+import { Router, RouterOutlet, RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -11,10 +10,9 @@ import { RouterLink } from '@angular/router';
 })
 export class HeaderComponent {
 
-disabledButtons: boolean = true;
+constructor(private route: Router){}
 
-isButtonsDisabled(): void {
-  this.disabledButtons = !this.disabledButtons;
-}
-
+  isTheRouteCorrect():boolean{
+    return this.route.url === "/home"
+  }
 }
