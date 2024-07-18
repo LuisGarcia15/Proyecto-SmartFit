@@ -67,7 +67,7 @@ CONSTRAINT MINIMUM_4_CHARACTERS_NAME CHECK(CHAR_LENGTH(full_name_pmd)>=4),
 CONSTRAINT ONLY_LETTERS CHECK(full_name_pmd REGEXP '[^0-9]'),
 CONSTRAINT NO_SIMBOLS CHECK(full_name_pmd REGEXP '[A-ZÑÁÉÍÓÚÜ ]+$'),
 CONSTRAINT CARD_NUMBER_SIZE CHECK(number_card_pmd REGEXP '^[0-9]{16}'),
-CONSTRAINT CV_SIZE CHECK(number_cvc_pmd REGEXP '^[0-9]{3}'),
+CONSTRAINT CVC_SIZE CHECK(number_cvc_pmd REGEXP '^[0-9]{3}'),
 CONSTRAINT FORMAT_DATE CHECK(date_card_pmd REGEXP '^[0-9]{2}-[0-9]{2}')
 )DEFAULT CHARACTER SET utf8;
 /*------------------------------------------------- 5*/

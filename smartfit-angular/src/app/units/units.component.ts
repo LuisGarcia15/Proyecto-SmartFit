@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { HeaderComponent } from '../mainComponents/header/header.component'
 import { FooterComponent } from '../mainComponents/footer/footer.component'
-import { TrainingUnitsService } from '../services/training-units.service';
+import { BackendService } from '../services/backend.service';
 import { TrainingUnit } from '../models/training-unit';
 import { TrainingUnitAddress } from '../models/training-unit-address';
 import { RouterLink } from '@angular/router';
 import { RegisterComponent } from '../register/register.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-units',
@@ -20,7 +21,7 @@ export class UnitsComponent {
   units! : TrainingUnit[];
   register!: RegisterComponent;
 
-  constructor(private service:TrainingUnitsService) {
+  constructor(private service:BackendService) {
     this.service.getAllTrainingUnits().subscribe(gyms => {
       this.units = gyms
     });

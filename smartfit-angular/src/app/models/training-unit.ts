@@ -1,5 +1,7 @@
 import { TrainingUnitAddress } from "./training-unit-address";
 export class TrainingUnit{
+
+    public id!: number;
     public name: string;
     public idTrainingUnitAddress: TrainingUnitAddress ;
 
@@ -8,19 +10,4 @@ export class TrainingUnit{
         this.idTrainingUnitAddress = idTrainingUnitAddress;
     }
 
-    public getName(): string{
-        return this.name;
-    }
-
-    public setName(name: string): void{
-        this.name = name;
-    }
-
-    public getTrainingUnitAddress(): TrainingUnitAddress{
-        return this.idTrainingUnitAddress;
-    }
-
-    public setTrainingUnitAddress(idTrainingUnitAddress: TrainingUnitAddress): void{
-        this.idTrainingUnitAddress = idTrainingUnitAddress;
-    }
   }
