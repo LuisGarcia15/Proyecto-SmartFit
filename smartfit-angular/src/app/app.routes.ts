@@ -11,6 +11,6 @@ export const routes: Routes = [
 {path: 'login', component: LoginComponent},
 {path: 'gimnasios', component: UnitsComponent},
 { path: '',   redirectTo: '/home', pathMatch: 'full' },
-{path: 'test', component: RegisterComponent},
+{path: 'register', component: RegisterComponent},
 {path: 'profile', component: ProfileComponent},
 ];

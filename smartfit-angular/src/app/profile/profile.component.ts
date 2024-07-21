@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { BackendService } from '../services/backend.service';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-profile',
@@ -12,14 +13,17 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class ProfileComponent {
 
   public token!: string;
+  public profile!: any;
 
   constructor(service:BackendService){
     service.token$.subscribe(item => {
       this.token = item
-      console.log(this.token + " inside");
     });
 
-    console.log(this.token + " outside");
+    service.profile$.subscribe(item => {
+      this.profile = JSON.stringify(item);
+      console.log("Profile desde component: " + this.profile);
+    });
   }
 
 }

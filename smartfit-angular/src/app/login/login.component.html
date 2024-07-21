@@ -1,26 +1,27 @@
 <app-login-header></app-login-header>
 <main>
   <section id="backgroundSection">
-    <div id="boxLogin">
+    <form method="post">
+    <div id="boxLogin" [formGroup] = "userValidation">
       <h6>Ingrese al Espacio del Cliente</h6>
       <div id="inputEmail">
       <p>CORREO ELECTRÓNICO</p>
-      <input type="email">
+      <input type="email" formControlName="user">
       </div>
       <div id="inputPassword">
       <p>CONTRASEÑA</p>
-      <input type="password">
+      <input type="password" formControlName="password">
       <a href="#" id="changePassLink">Olvidé mi contraseña</a>
       </div>
       <div id="containerButtons">
-      <a class="btn btn-warning buttonL">
+        <button class="btn btn-warning buttonL" type="submit" (click)="authenticationUser()" [disabled]="!userValidation.valid" [routerLink]="userValidation.valid ? ['/profile'] : []">Enviar</button>
           Tu espacio
-      </a>
       <a class="btn btn-outline-dark buttonL">
-          Tu espacio
+          Primer Acceso
       </a>
       </div>
     </div>
+  </form>
   </section>
 </main>
 <app-login-footer></app-login-footer>

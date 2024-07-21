@@ -75,8 +75,6 @@ export class RegisterComponent {
         trainingUnitId: new FormControl(''),
       })
     });
-
-    
   }
 
   test(){

@@ -1,6 +1,5 @@
 package com.project.smartfit.controllers;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.smartfit.dto.AuthenticationRequest;
 import com.project.smartfit.dto.AuthenticationResponse;
 import com.project.smartfit.dto.LogOutResponse;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:4200/")
 //@CrossOrigin
 /*CrossOrigin sin parametros permite cualquier peticion de cualquier origen.
 * A nivel de clase admite peticiones a todos los métodos. A nivel de método
@@ -41,8 +41,8 @@ public class LoginController {
      * no se coloca su ID en la URL o como parámetro pues será el usuario
      * logueado en ese momento*/
     @GetMapping("/profile")
-    public ResponseEntity<Client> findOneProfile() {
-        ObjectMapper objectMapper = new ObjectMapper();
+    public ResponseEntity<Client> findOneProfile(HttpServletRequest test) {
+        //System.out.println("Header: " + test.getHeader("Authorization"));
         Optional<Client> client = this.clientRepository.getAllInformationOneClient(1L);
         System.out.println(client.orElseThrow());
         return ResponseEntity.ok(client.orElseThrow());
