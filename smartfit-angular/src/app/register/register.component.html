@@ -1,4 +1,4 @@
-<form action="post" [formGroup]="json" (ngSubmit)="test()">
+<form action="post" [formGroup]="json">
   <h1>Usuario</h1>
 
   <label for="emailClient">Correo electrónico de cliente:</label>
@@ -145,6 +145,8 @@
 
   <br>
 
-  <button type="submit" [disabled]="!json.valid" [routerLink]="json.valid ? ['/profile'] : []">Enviar</button>
+  <button type="submit" (click)="test()" [disabled]="!json.valid" [routerLink]="json.valid ? ['/profile'] : []">Enviar</button>
 
 </form>
+
+<!--[routerLink]="json.valid ? ['/profile'] : []"-->

@@ -89,13 +89,18 @@ export class RegisterComponent {
     return item.name === this.json.value.clientPlanTrainingUnit.planId; 
     });
 
-    this.json.value.clientPlanTrainingUnit.planId = plan?.id;
+    this.json.value.clientPlanTrainingUnit.planId = plan;
+
+    console.log(plan?.price);
 
     this.json.value.payment.totalBalance = plan?.price;
 
-    this.json.value.clientPlanTrainingUnit.trainingUnitId = this.unit.id;
+    this.json.value.clientPlanTrainingUnit.trainingUnitId = this.unit;
 
     console.log(this.json);
+    console.log(this.json.value)
+
+    this.service.postOneNewClient(this.json.value)
 
   }
 

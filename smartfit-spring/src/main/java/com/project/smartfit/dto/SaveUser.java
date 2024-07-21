@@ -77,4 +77,18 @@ public class SaveUser {
     public void setClientPlanTrainingUnit(SaveClientPlanTrainingUnit clientPlanTrainingUnit) {
         this.clientPlanTrainingUnit = clientPlanTrainingUnit;
     }
+
+    @Override
+    public String toString() {
+        return "SaveUser{" +
+                "user='" + user + '\'' +
+                ", password='" + password + '\'' +
+                ", client=" + client +
+                ", clientAddress=" + clientAddress +
+                ", contactPerson=" + contactPerson +
+                ", paymentMethod=" + paymentMethod +
+                ", payment=" + payment +
+                ", clientPlanTrainingUnit=" + clientPlanTrainingUnit +
+                '}';
+    }
 }

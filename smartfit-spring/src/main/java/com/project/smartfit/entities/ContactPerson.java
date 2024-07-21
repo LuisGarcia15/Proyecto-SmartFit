@@ -1,5 +1,6 @@
 package com.project.smartfit.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -28,6 +29,7 @@ public class ContactPerson {
     @OneToOne(orphanRemoval = true)
     @JoinColumn(name = "id_client_cpn")
     @NotNull
+    @JsonBackReference
     private Client idClient;
 
     public ContactPerson() {
@@ -110,7 +112,6 @@ public class ContactPerson {
                 ", paternalSurname='" + paternalSurname + '\'' +
                 ", maternalSurname='" + maternalSurname + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", idClient=" + idClient +
-                "}\n";
+                '}';
     }
 }

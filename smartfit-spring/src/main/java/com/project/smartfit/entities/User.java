@@ -154,10 +154,9 @@ public class User implements UserDetails {
     public String toString() {
         return "{" +
                 "id=" + id +
-                ", role='" + role + '\'' +
+                ", role=" + role +
                 ", user='" + user + '\'' +
                 ", password='" + password + '\'' +
-                ", idClient=" + idClient +
-                "}\n";
+                '}';
     }
 }

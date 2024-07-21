@@ -1,5 +1,7 @@
 package com.project.smartfit.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -30,12 +32,30 @@ public class Client {
     private String phoneNumber;
     @Column(name = "email_clt")
     @NotNull
+    @JsonBackReference
     private String email;
+
+    @JsonManagedReference
+    @OneToOne(mappedBy = "idClient")
+    private ClientAddress clientAddress;
+
+    @JsonManagedReference
+    @OneToOne(mappedBy = "idClient")
+    private Payment payment;
+
+    @JsonManagedReference
+    @OneToOne(mappedBy = "idClient")
+    private ContactPerson contactPerson;
+
+    @JsonManagedReference
+    @OneToOne(mappedBy = "idClient")
+    private PaymentMethod paymentMethod;
 
     public Client() {
     }
 
     public Client(Long id, String name, String paternalSurname, String maternalSurname, String curp, String phoneNumber, String email) {
+        this();
         this.id = id;
         this.name = name;
         this.paternalSurname = paternalSurname;
@@ -115,14 +135,18 @@ public class Client {
 
     @Override
     public String toString() {
-        return "{" +
+        return "Client{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", paternalSurname='" + paternalSurname + '\'' +
                 ", maternalSurname='" + maternalSurname + '\'' +
                 ", curp='" + curp + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
-                ", email='" + email + '\'' +
-                "}\n";
+                ", email='" + email + "\n" +
+                "ClientAddress=" + clientAddress + "\n" +
+                "Payment=" + payment + "\n" +
+                "ContactPerson=" + contactPerson + "\n" +
+                "PaymentMethod=" + paymentMethod + "\n" +
+                '}';
     }
 }

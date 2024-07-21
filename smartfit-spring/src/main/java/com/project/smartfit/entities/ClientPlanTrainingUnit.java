@@ -8,6 +8,7 @@ import java.util.Objects;
 @Table(name = "client_plan_training_unit")
 public class ClientPlanTrainingUnit {
 
+
     @EmbeddedId
     private ClientPlanTrainingUnitPK id;
     @OneToOne

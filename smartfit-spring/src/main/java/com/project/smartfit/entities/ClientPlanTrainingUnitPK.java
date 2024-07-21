@@ -13,6 +13,7 @@ public class ClientPlanTrainingUnitPK {
     @Column(name = "start_date_cpl")
     private String startDate;
 
+
     public ClientPlanTrainingUnitPK() {
     }
 

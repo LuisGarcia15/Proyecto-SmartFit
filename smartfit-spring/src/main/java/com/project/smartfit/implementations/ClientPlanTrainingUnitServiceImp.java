@@ -28,8 +28,8 @@ public class ClientPlanTrainingUnitServiceImp implements ClientPlanTrainingUnitS
         clientPlanTrainingUnit.setId(new ClientPlanTrainingUnitPK());
         clientPlanTrainingUnit.getId().setIdClient(client.getId());
         clientPlanTrainingUnit.getId().setStartDate(newUser.getClientPlanTrainingUnit().getStartDate());
-        clientPlanTrainingUnit.setIdPlan(this.planRepository.findById(1L).get());
-        clientPlanTrainingUnit.setIdTrainingUnit(this.trainingUnitRepository.findById(1L).get());
+        clientPlanTrainingUnit.setIdPlan(newUser.getClientPlanTrainingUnit().getPlanId());
+        clientPlanTrainingUnit.setIdTrainingUnit(newUser.getClientPlanTrainingUnit().getTrainingUnitId());
 
         return this.clientPlanTrainingUnitRepository.save(clientPlanTrainingUnit);
     }

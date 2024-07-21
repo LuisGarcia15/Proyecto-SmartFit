@@ -2,7 +2,6 @@ package com.project.smartfit.services;
 
 import com.project.smartfit.dto.AuthenticationRequest;
 import com.project.smartfit.dto.AuthenticationResponse;
-import com.project.smartfit.dto.RegisteredUser;
 import com.project.smartfit.dto.SaveUser;
 import com.project.smartfit.entities.*;
 import com.project.smartfit.repositories.JwtTokenRepository;
@@ -53,7 +52,7 @@ public class AuthenticationService {
     private AuthenticationManager authenticationManager;
 
     /*Permite registrar un usuario en la BD y usar un dto para el logn*/
-    public RegisteredUser registeredUser(SaveUser newUser){
+    public AuthenticationResponse registeredUser(SaveUser newUser){
         /*Crea un nuevo User en la BD, LOS SIGUIENTES MÉTODOS REGISTRAN
         * LA INFORMACIÓN DE UN NUEVO USUARIO EN LA BD*/
         Client client = this.clientService.registerOneRegister(newUser);
@@ -70,19 +69,20 @@ public class AuthenticationService {
          * generateToker(UserDetails) NECESITA COMO PARÁMETRO
          * UN UserDetails*/
         String token = jwtService.generateJWT(user, generateExtraClaims(user));
+
         /*Salvamos el JWT en la BD*/
-        saveUserToken(user, token);
+        //saveUserToken(user, token);
 
         /*Poblamos el dto con el nuevo usuario creado, esta clase nos sirve para mostrar el JWT
         * formado para un nuevo usuario*/
-        RegisteredUser registeredUser = new RegisteredUser();
-        registeredUser.setId(user.getId());
-        registeredUser.setUser(user.getUser());
-        registeredUser.setRole(user.getRole().name());
+//        RegisteredUser registeredUser = new RegisteredUser();
+//        registeredUser.setId(user.getId());
+//        registeredUser.setUser(user.getUser());
+//        registeredUser.setRole(user.getRole().name());
+//        registeredUser.setToken(token);
 
-        registeredUser.setToken(token);
-
-        return registeredUser;
+        AuthenticationRequest authenticationRequest = new AuthenticationRequest(newUser.getUser(), newUser.getPassword());
+        return this.login(authenticationRequest);
     }
 
     private void saveUserToken(User user, String jwt) {

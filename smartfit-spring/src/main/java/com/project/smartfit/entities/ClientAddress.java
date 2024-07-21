@@ -1,5 +1,6 @@
 package com.project.smartfit.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -31,6 +32,7 @@ public class ClientAddress {
     @OneToOne(orphanRemoval = true)
     @JoinColumn(name = "id_client_cls")
     @NotNull
+    @JsonBackReference
     private Client idClient;
 
     public ClientAddress() {
@@ -123,7 +125,6 @@ public class ClientAddress {
                 ", insideNumber='" + insideNumber + '\'' +
                 ", state='" + state + '\'' +
                 ", city='" + city + '\'' +
-                ", idClient=" + idClient +
-                "}\n";
+                '}';
     }
 }

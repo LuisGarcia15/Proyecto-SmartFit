@@ -1,5 +1,6 @@
 package com.project.smartfit.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -31,6 +32,7 @@ public class PaymentMethod {
     @OneToOne(orphanRemoval = true)
     @JoinColumn(name = "id_client_pmd")
     @NotNull
+    @JsonBackReference
     private Client idClient;
 
     public PaymentMethod() {
@@ -123,7 +125,6 @@ public class PaymentMethod {
                 ", numberCVC='" + numberCVC + '\'' +
                 ", dateCard='" + dateCard + '\'' +
                 ", flag='" + flag + '\'' +
-                ", idClient=" + idClient +
-                "}\n";
+                '}';
     }
 }
