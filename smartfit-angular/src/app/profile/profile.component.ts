@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { BackendService } from '../services/backend.service';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { FormGroup } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
@@ -14,16 +13,23 @@ export class ProfileComponent {
 
   public token!: string;
   public profile!: any;
+  public service!: BackendService;
 
   constructor(service:BackendService){
-    service.token$.subscribe(item => {
+    this.service = service
+    this.service.token$.subscribe(item => {
       this.token = item
     });
 
-    service.profile$.subscribe(item => {
+    this.service.profile$.subscribe(item => {
       this.profile = JSON.stringify(item);
-      console.log("Profile desde component: " + this.profile);
     });
   }
 
+  logout(): void{
+    this.service.postLogoutUser(this.token)
+    this.service.setEmptyInformation();
+    this.token = "";
+    this.profile = undefined;
+  }
 }

@@ -1,5 +1,6 @@
 import { Component} from '@angular/core';
 import { Router, RouterOutlet, RouterLink} from '@angular/router';
+import { BackendService } from '../../services/backend.service';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +11,8 @@ import { Router, RouterOutlet, RouterLink} from '@angular/router';
 })
 export class HeaderComponent {
 
-constructor(private route: Router){}
+  private service!: BackendService;
+constructor(private route: Router, service: BackendService){}
 
   isTheRouteCorrect():boolean{
     return this.route.url === "/home"

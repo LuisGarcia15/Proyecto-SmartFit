@@ -11,17 +11,16 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "http://localhost:4200/")
 @RestController
-@RequestMapping("/register")
 public class UserController {
 
     @Autowired
     private AuthenticationService authenticationService;
 
     @Transactional
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> registerOne(@RequestBody SaveUser newUser){
-        AuthenticationResponse response = this.authenticationService.registeredUser(newUser);
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        this.authenticationService.registeredUser(newUser);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
 }

@@ -35,6 +35,10 @@ public class Client {
     @JsonBackReference
     private String email;
 
+    @JsonBackReference
+    @OneToOne(mappedBy = "idClient")
+    private User user;
+
     @JsonManagedReference
     @OneToOne(mappedBy = "idClient")
     private ClientAddress clientAddress;

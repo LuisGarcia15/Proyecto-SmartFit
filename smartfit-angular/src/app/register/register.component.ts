@@ -16,7 +16,7 @@ export class RegisterComponent {
 
   public unit!: TrainingUnit;
   public plans!: Plan[];
-  public json!: FormGroup;
+  public newUser!: FormGroup;
   private service!: BackendService;
 
   constructor(service: BackendService){
@@ -30,7 +30,7 @@ export class RegisterComponent {
       this.plans = item
     });
 
-    this.json = new FormGroup({
+    this.newUser = new FormGroup({
       user: new FormControl('', [Validators.required, Validators.pattern('^[a-z0-9!#$%&*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$')]),
       password: new FormControl('', [Validators.required, Validators.pattern('^[A-Z]{1}[a-z0-9]+[a-z0-9ñ@!¡#$%&¿?+*-]+'), Validators.minLength(5)]),
       client: new FormGroup({
@@ -79,26 +79,29 @@ export class RegisterComponent {
 
   test(){
 
-    this.json.value.client.email = this.json.value.user;
+    this.newUser.value.client.email = this.newUser.value.user;
 
-    this.json.value.payment.flag = this.json.value.paymentMethod.flag;
+    this.newUser.value.payment.flag = this.newUser.value.paymentMethod.flag;
 
     const plan = this.plans.find(item => {
-    return item.name === this.json.value.clientPlanTrainingUnit.planId; 
+    return item.name === this.newUser.value.clientPlanTrainingUnit.planId; 
     });
 
-    this.json.value.clientPlanTrainingUnit.planId = plan;
+    this.newUser.value.clientPlanTrainingUnit.planId = plan;
 
-    console.log(plan?.price);
+    this.newUser.value.payment.totalBalance = plan?.price;
 
-    this.json.value.payment.totalBalance = plan?.price;
+    this.newUser.value.clientPlanTrainingUnit.trainingUnitId = this.unit;
 
-    this.json.value.clientPlanTrainingUnit.trainingUnitId = this.unit;
+//    console.log(this.newUser);
+//    console.log(this.newUser.value);
 
-    console.log(this.json);
-    console.log(this.json.value)
+    const newLogin = {
+      user: this.newUser.value.user,
+      password: this.newUser.value.password,
+    };
 
-    this.service.postOneNewClient(this.json.value)
+    this.service.postOneNewClient(this.newUser.value, newLogin)
 
   }
 

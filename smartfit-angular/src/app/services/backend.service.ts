@@ -27,34 +27,48 @@ export class BackendService {
     this.units.next(unit);
   }
 
+  setEmptyInformation(): void{
+    this.profile.next(null);
+    this.token.next(null);
+  }
+
   //Registro de nuevo cliente
-  postOneNewClient(newUser: FormGroup):void{
-    const token = this.http.post<RegisteredUser>(this.url+"register", newUser);
+  postOneNewClient(newUser: FormGroup, newLogin: any):void{
+    const token = this.http.post<any>(this.url+"register", newUser);
     token.subscribe(item=> {
-      this.token.next(item.jwt);
+      this.postLoginNewUser(newLogin);
     });
   }
 
   //Login de nuevo usuario
    postLoginNewUser(newUser: FormGroup):void{
-    const token = this.http.post<RegisteredUser>(this.url+"auth/login", newUser);
+    const token = this.http.post<RegisteredUser>(this.url+"login", newUser);
     token.subscribe(item=> {
-      this.getAllInformationOneUser(item);
       this.token.next(item.jwt);
+      this.getAllInformationOneUser(item);
     });
   }
 
+  //Profile de user
   getAllInformationOneUser(token: RegisteredUser): void{
-    const information = this.http.get<any>(this.url+'auth/profile', {
+    const information = this.http.get<any>(this.url+"profile", {
       headers: {
           "Authorization" : "Bearer " + token.jwt,
       }
     });
 
     information.subscribe(item=> {
-      console.log(item);
       this.profile.next(item);
     });
+  }
+
+  //Logout
+  postLogoutUser(token: string):void{
+    this.http.get<any>(this.url+"logout", {
+      headers: {
+          "Authorization" : "Bearer " + token,
+      }
+    }).subscribe();
   }
 
   //Plan

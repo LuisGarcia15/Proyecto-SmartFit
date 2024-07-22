@@ -60,7 +60,6 @@ JwtService {
         /*Crea una llave segura gracias a una llave de un archivo
         * properties*/
         byte[] passwordDecoded = Decoders.BASE64.decode(SECRET_KEY);
-        System.out.println(new String(passwordDecoded));
         return Keys.hmacShaKeyFor(passwordDecoded);
         /*OBTENIENDO LA CLAVE CIFRADA BAJO LA FUNCIÓN STANDARD EN jwt.io*/
     }

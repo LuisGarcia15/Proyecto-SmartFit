@@ -71,7 +71,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         //4-. Setear objeto Authentication dentro del SecurityContext que este
         /*Obtenemos el User a partir de subject obtenido en el JWT para
         * obtener los Authorities*/
-        User userDetails = userService.findByUser(user).get();
+        User userDetails = userService.findByUser(user).orElseThrow();
         // a su vez se encuentra en el SecurityContext. Un objeto Authentication
         //tiene un princial, un credentials y unas authorities
         /*UsernamePasswordAuthenticationToken extiende de AbstractAuthenticationToker, asu vez extiende

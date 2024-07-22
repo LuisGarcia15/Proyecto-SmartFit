@@ -52,7 +52,7 @@ public class AuthenticationService {
     private AuthenticationManager authenticationManager;
 
     /*Permite registrar un usuario en la BD y usar un dto para el logn*/
-    public AuthenticationResponse registeredUser(SaveUser newUser){
+    public void registeredUser(SaveUser newUser){
         /*Crea un nuevo User en la BD, LOS SIGUIENTES MÉTODOS REGISTRAN
         * LA INFORMACIÓN DE UN NUEVO USUARIO EN LA BD*/
         Client client = this.clientService.registerOneRegister(newUser);
@@ -68,21 +68,21 @@ public class AuthenticationService {
          * ESTA IMPLEMENTA LA INTERFAZ UserDetails Y EL MÉTODO
          * generateToker(UserDetails) NECESITA COMO PARÁMETRO
          * UN UserDetails*/
-        String token = jwtService.generateJWT(user, generateExtraClaims(user));
+       /* String token = jwtService.generateJWT(user, generateExtraClaims(user));*/
 
         /*Salvamos el JWT en la BD*/
         //saveUserToken(user, token);
 
         /*Poblamos el dto con el nuevo usuario creado, esta clase nos sirve para mostrar el JWT
         * formado para un nuevo usuario*/
-//        RegisteredUser registeredUser = new RegisteredUser();
-//        registeredUser.setId(user.getId());
-//        registeredUser.setUser(user.getUser());
-//        registeredUser.setRole(user.getRole().name());
-//        registeredUser.setToken(token);
+/*        RegisteredUser registeredUser = new RegisteredUser();
+        registeredUser.setId(user.getId());
+        registeredUser.setUser(user.getUser());
+        registeredUser.setRole(user.getRole().name());
+        registeredUser.setToken(token);*/
 
-        AuthenticationRequest authenticationRequest = new AuthenticationRequest(newUser.getUser(), newUser.getPassword());
-        return this.login(authenticationRequest);
+       /* AuthenticationRequest authenticationRequest = new AuthenticationRequest(newUser.getUser(), newUser.getPassword());
+        return this.login(authenticationRequest);*/
     }
 
     private void saveUserToken(User user, String jwt) {
@@ -185,10 +185,14 @@ public class AuthenticationService {
 
         /*Si existe un objeto en el Opcional y es valido el token*/
         if(token.isPresent() && token.get().isValid()){
+            System.out.println("---------- Token actualizado ---------");
             token.get().setValid(false);
             /*Colocamos su validez en falso*/
             this.jwtRepository.save(token.get());
             /*Actualizamos ese token en la BD*/
         }
+        System.out.println("Before: " + SecurityContextHolder.getContext().getAuthentication());
+        SecurityContextHolder.getContext().setAuthentication(null);
+        System.out.println("After: " + SecurityContextHolder.getContext().getAuthentication());
     }
 }

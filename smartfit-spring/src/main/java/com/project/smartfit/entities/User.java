@@ -1,5 +1,6 @@
 package com.project.smartfit.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.project.smartfit.util.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -38,6 +39,7 @@ public class User implements UserDetails {
     @OneToOne(orphanRemoval = true)
     @JoinColumn(name = "id_client_usr")
     @NotNull
+    @JsonManagedReference
     private Client idClient;
 
     public User() {
@@ -152,11 +154,12 @@ public class User implements UserDetails {
 
     @Override
     public String toString() {
-        return "{" +
+        return "User{" +
                 "id=" + id +
                 ", role=" + role +
                 ", user='" + user + '\'' +
                 ", password='" + password + '\'' +
+                ", idClient=" + idClient +
                 '}';
     }
 }

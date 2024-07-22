@@ -1,14 +1,14 @@
-<form action="post" [formGroup]="json">
+<form action="post" [formGroup]="newUser">
   <h1>Usuario</h1>
 
   <label for="emailClient">Correo electrónico de cliente:</label>
   <input type="email" id="emailClient" formControlName="user">
-  <div class="alert" [hidden]="json.get('user')?.valid">Dato no formado correctamente</div>
+  <div class="alert" [hidden]="newUser.get('user')?.valid">Dato no formado correctamente</div>
 
   <br>
   <label for="passwordClient">Contraseña de cliente:</label>
   <input type="password" id="passwordClient" formControlName="password">
-  <div class="alert" [hidden]="json.get('password')?.valid">Dato no formado correctamente</div>
+  <div class="alert" [hidden]="newUser.get('password')?.valid">Dato no formado correctamente</div>
 
   <br>
 
@@ -18,27 +18,27 @@
 
     <label for="nameClient">Nombre de cliente:</label>
     <input type="text" id="nameClient" formControlName="name">
-    <div class="alert" [hidden]="json.get('client.name')?.valid">Dato no formado correctamente</div>
+    <div class="alert" [hidden]="newUser.get('client.name')?.valid">Dato no formado correctamente</div>
 
     <br>
     <label for="paternalSurnameClient">Apellido paterno de cliente:</label>
     <input type="text" id="paternalSurnameClient" formControlName="paternalSurname">
-    <div class="alert" [hidden]="json.get('client.paternalSurname')?.valid">Dato no formado correctamente</div>
+    <div class="alert" [hidden]="newUser.get('client.paternalSurname')?.valid">Dato no formado correctamente</div>
 
     <br>
     <label for="maternalSurnameClient">Apellido materno de cliente:</label>
     <input type="text" id="maternalSurnameClient" formControlName="maternalSurname">
-    <div class="alert" [hidden]="json.get('client.maternalSurname')?.valid">Dato no formado correctamente</div>
+    <div class="alert" [hidden]="newUser.get('client.maternalSurname')?.valid">Dato no formado correctamente</div>
 
     <br>
     <label for="curpClient">CURP de cliente:</label>
     <input type="text" id="curpClient" formControlName="curp">
-    <div class="alert" [hidden]="json.get('client.curp')?.valid">Dato no formado correctamente</div>
+    <div class="alert" [hidden]="newUser.get('client.curp')?.valid">Dato no formado correctamente</div>
 
     <br>
     <label for="phoneNumberClient">Teléfono de cliente:</label>
     <input type="tel" id="phoneNumberClient" formControlName="phoneNumber" pattern="^[0-9]{10}$">
-    <div class="alert" [hidden]="json.get('client.phoneNumber')?.valid">Dato no formado correctamente</div>
+    <div class="alert" [hidden]="newUser.get('client.phoneNumber')?.valid">Dato no formado correctamente</div>
 
   </div>
 
@@ -48,27 +48,27 @@
 
   <label for="nameAddressClient">Nombre de calle:</label>
   <input type="text" id="nameAddressClient" formControlName="name">
-  <div class="alert" [hidden]="json.get('clientAddress.name')?.valid">Dato no formado correctamente</div>
+  <div class="alert" [hidden]="newUser.get('clientAddress.name')?.valid">Dato no formado correctamente</div>
 
   <br>
   <label for="outerNumberClient">Número exterior:</label>
   <input type="number" id="outerNumberClient" formControlName="outerNumber">
-  <div class="alert" [hidden]="json.get('clientAddress.outerNumber')?.valid">Dato no formado correctamente</div>
+  <div class="alert" [hidden]="newUser.get('clientAddress.outerNumber')?.valid">Dato no formado correctamente</div>
 
   <br>
   <label for="insideNumberClient">Número interior:</label>
   <input type="number" id="insideNumberClient" formControlName="insideNumber">
-  <div class="alert" [hidden]="json.get('clientAddress.insideNumber')?.valid">Dato no formado correctamente</div>
+  <div class="alert" [hidden]="newUser.get('clientAddress.insideNumber')?.valid">Dato no formado correctamente</div>
 
   <br>
   <label for="stateAddressClient">Estado:</label>
   <input type="text" id="stateAddressClient" formControlName="state">
-  <div class="alert" [hidden]="json.get('clientAddress.state')?.valid">Dato no formado correctamente</div>
+  <div class="alert" [hidden]="newUser.get('clientAddress.state')?.valid">Dato no formado correctamente</div>
 
   <br>
   <label for="cityAddressClient">Ciudad:</label>
   <input type="text" id="cityAddressClient" formControlName="city">
-  <div class="alert" [hidden]="json.get('clientAddress.city')?.valid">Dato no formado correctamente</div>
+  <div class="alert" [hidden]="newUser.get('clientAddress.city')?.valid">Dato no formado correctamente</div>
 </div>
 
    <h1>Persona de contacto de cliente</h1>
@@ -77,22 +77,22 @@
 
     <label for="nameContactPerson">Nombre de persona de contacto:</label>
     <input type="text" id="nameContactPerson" formControlName="name">
-    <div class="alert" [hidden]="json.get('contactPerson.name')?.valid">Dato no formado correctamente</div>
+    <div class="alert" [hidden]="newUser.get('contactPerson.name')?.valid">Dato no formado correctamente</div>
 
     <br>
    <label for="paternalSurnameContactPerson">Apellido paterno de persona de contacto:</label>
    <input type="text" id="paternalSurnameContactPerson" formControlName="paternalSurname">
-   <div class="alert" [hidden]="json.get('contactPerson.paternalSurname')?.valid">Dato no formado correctamente</div>
+   <div class="alert" [hidden]="newUser.get('contactPerson.paternalSurname')?.valid">Dato no formado correctamente</div>
 
    <br>
    <label for="maternalSurnameContactPerson">Apellido materno de persona de contacto:</label>
    <input type="text" id="maternalSurnameContactPerson" formControlName="maternalSurname">
-   <div class="alert" [hidden]="json.get('contactPerson.maternalSurname')?.valid">Dato no formado correctamente</div>
+   <div class="alert" [hidden]="newUser.get('contactPerson.maternalSurname')?.valid">Dato no formado correctamente</div>
 
    <br>
    <label for="phoneNumberContactPerson">Teléfono de persona de contacto:</label>
    <input type="tel" id="phoneNumberContactPerson" formControlName="phoneNumber">
-   <div class="alert" [hidden]="json.get('contactPerson.phoneNumber')?.valid">Dato no formado correctamente</div>
+   <div class="alert" [hidden]="newUser.get('contactPerson.phoneNumber')?.valid">Dato no formado correctamente</div>
 
   </div>
    
@@ -102,22 +102,22 @@
 
   <label for="namePaymentMethod">Nombre completo del tarjetahabiente:</label>
   <input type="text" id="namePaymentMethod" formControlName="fullName">
-  <div class="alert" [hidden]="json.get('paymentMethod.fullName')?.valid">Dato no formado correctamente</div>
+  <div class="alert" [hidden]="newUser.get('paymentMethod.fullName')?.valid">Dato no formado correctamente</div>
 
   <br>
   <label for="numberPaymentMethod">Número de tarjeta:</label>
   <input type="text" id="numberPaymentMethod" formControlName="numberCard">
-  <div class="alert" [hidden]="json.get('paymentMethod.numberCard')?.valid">Dato no formado correctamente</div>
+  <div class="alert" [hidden]="newUser.get('paymentMethod.numberCard')?.valid">Dato no formado correctamente</div>
 
   <br>
   <label for="cvcPaymentMethod">Número de seguridad:</label>
   <input type="text" id="cvcPaymentMethod" formControlName="numberCVC">
-  <div class="alert" [hidden]="json.get('paymentMethod.numberCVC')?.valid">Dato no formado correctamente</div>
+  <div class="alert" [hidden]="newUser.get('paymentMethod.numberCVC')?.valid">Dato no formado correctamente</div>
 
   <br>
   <label for="datePaymentMethod">Fecha de vencimiento:</label>
   <input type="text" id="datePaymentMethod" formControlName="dateCard">
-  <div class="alert" [hidden]="json.get('paymentMethod.dateCard')?.valid">Dato no formado correctamente</div>
+  <div class="alert" [hidden]="newUser.get('paymentMethod.dateCard')?.valid">Dato no formado correctamente</div>
 
   <br>
   <label for="flagPaymentMethod">Tarjeta:</label>
@@ -128,7 +128,7 @@
   </select>
   <br>
   </div>
-  <div class="alert" [hidden]="json.get('paymentMethod.flag')?.valid">Dato no formado correctamente</div>
+  <div class="alert" [hidden]="newUser.get('paymentMethod.flag')?.valid">Dato no formado correctamente</div>
 
   <h1>Plan</h1>
 
@@ -141,12 +141,10 @@
     <option value="PLAN ELITE">PLAN ELITE</option>
   </select>
   </div>
-  <div class="alert" [hidden]="json.get('clientPlanTrainingUnit.planId')?.valid">Dato no formado correctamente</div>
+  <div class="alert" [hidden]="newUser.get('clientPlanTrainingUnit.planId')?.valid">Dato no formado correctamente</div>
 
   <br>
 
-  <button type="submit" (click)="test()" [disabled]="!json.valid" [routerLink]="json.valid ? ['/profile'] : []">Enviar</button>
+  <button type="submit" (click)="test()" [disabled]="!newUser.valid" [routerLink]="newUser.valid ? ['/profile'] : []">Enviar</button>
 
 </form>
-
-<!--[routerLink]="json.valid ? ['/profile'] : []"-->

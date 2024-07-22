@@ -49,7 +49,7 @@ public class HttpSecurityConfig {
                         *
                         * A su vez, permite habilitar el bean de configuración para
                         * ionyectar la configuración de CORS por bean*/
-                        .securityMatcher("/login", "/register")
+                        .securityMatcher("/profile")
                         /*Se está agregando un filtro de seguridad pero que se ejecutará antes del
                         * filtro de seguridad de UssernamePasswordAuthentication*/
                         .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
@@ -72,18 +72,14 @@ public class HttpSecurityConfig {
                          /*------------------------------------------------------------*/
                          /*Configurarmos las rutas publicas y protegidas*/
                          .authorizeHttpRequests(authReqConfig -> {
-                             authReqConfig.requestMatchers(HttpMethod.POST,"/login/auth").permitAll();
-                             authReqConfig.requestMatchers(HttpMethod.POST,"/register").permitAll();
-                             authReqConfig.requestMatchers(HttpMethod.GET,"/login/token").permitAll();
-                             authReqConfig.requestMatchers(HttpMethod.GET,"/plan").permitAll();
-                             authReqConfig.requestMatchers(HttpMethod.GET, "/gimnasios").permitAll();
                              /*Definimos las rutas publicas y los métodos que podemos
-                             * utilizar sin login*/
+                              * utilizar sin login*/
                              //authReqConfig.requestMatchers(HttpMethod.POST,"/prueba/**").permitAll();
                              /*ES NECESARIO DEFINIR LOS ENDPOINTS PRIVADOS, aún ya se
-                             * hayan definido los endpoints publicos, en este caso, todos aquellos
-                             * andpoints que no sean los publicos, a continuación: -->*/
-                             authReqConfig.anyRequest().authenticated();
+                              * hayan definido los endpoints publicos, en este caso, todos aquellos
+                              * andpoints que no sean los publicos, a continuación: -->*/
+                             authReqConfig.requestMatchers(HttpMethod.GET, "/profile").authenticated();
+                             authReqConfig.anyRequest().permitAll();
 
                          })
                          .build();
